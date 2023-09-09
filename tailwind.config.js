@@ -6,23 +6,24 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        righteous: ['Righteous', 'cursive'],
-        poppins: ['Poppins', 'sans'],
+        heading: ['Righteous', 'cursive'], 
+        subheading: ['Poppins', 'sans'],   
+        normal: ['Poppins', 'sans'],
       },
       fontSize: {
-        '40': '40px',
-        '35': '35px',
-        '30': '30px',
+        'heading': '40px',
+        'subheading': '35px',
+        'normal': '30px',
       },
       colors: {
         green: '#606C38',
-        'olive-green': '#283618',
+        oliveGreen: '#283618',
         soft: '#FEFAE0',
         orange: '#DDA15E',
-        'dark-orange': '#BC6C25',
-        'light-blue': '#CAF3F0',
+        darkOrange: '#BC6C25',
+        lightblue: '#CAF3F0',
         blue: '#1A82EE',
-      }
+      },
     },
   },
   plugins: [],
