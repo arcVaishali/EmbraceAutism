@@ -5,17 +5,22 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Landing from "./AutismAppPages/AustismAppLanding";
 import AdultHome from "./AutismAppPages/AdultHome";
 import ShareStories from './AdultSection/Pages/ShareStories';
+import Volunteer from './AdultSection/Pages/Volunteer';
+import Features from "./AdultSection/Pages/Features";
 
 function App() {
   return (
     <div>
-      <Router>
-        <Routes>
-        <Route path='/' element={<Landing/>} exact/>
-          <Route path="/adult" element={<AdultHome />} exact />
-        </Routes>
-      </Router>
+      <Routes>
+        <Route path='/' element={<Landing />} exact />
+        <Route path="/adult" element={<AdultHome />} exact />
+      </Routes>
+
+      <Volunteer />
+      <ShareStories /> 
+      <Features/>
     </div>
+
   );
 }
 
