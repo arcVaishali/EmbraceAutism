@@ -25,7 +25,7 @@ function App() {
           <Route path="/child" element={<ChildHome />} exact />
           <Route path="/games" element={<Games />} exact />
           <Route path="/videos" element={<Videos />} exact />
-          <Route path="/puzzles" element={<Puzzles />} exact />
+          <Route path="/puzzles" element={<Puzzles />} exact /> 
         </Routes>
         <div>
           <Footer />
