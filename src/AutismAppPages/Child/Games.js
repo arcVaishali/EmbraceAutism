@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Games = () => {
   const [objects, setObjects] = useState([
-    { name: 'Ball', description: 'It\'s round and bounces.' },
+    { name: 'Ball', description: "It's round and bounces." },
     { name: 'Car', description: 'It has four wheels and you can drive it.' },
     { name: 'Book', description: 'You read it to learn new things.' },
   ]);
@@ -10,10 +10,13 @@ const Games = () => {
   const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [listening, setListening] = useState(false);
+  const [recognizer, setRecognizer] = useState(null);
 
-  const handleListening = () => {
-    setListening(true);
-    const recognition = new window.webkitSpeechRecognition();
+  const loadRecognizer = () => {
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+    recognition.continuous = false; 
+    
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript.toLowerCase();
       if (transcript.includes(objects[currentObjectIndex].name.toLowerCase())) {
@@ -22,7 +25,24 @@ const Games = () => {
       setListening(false);
       setCurrentObjectIndex((prevIndex) => prevIndex + 1);
     };
-    recognition.start();
+
+    recognition.onend = () => {
+      setListening(false);
+      setCurrentObjectIndex((prevIndex) => prevIndex + 1);
+    };
+
+    setRecognizer(recognition);
+  };
+
+  useEffect(() => {
+    loadRecognizer();
+  }, []);
+
+  const handleListening = () => {
+    if (recognizer) {
+      setListening(true);
+      recognizer.start();
+    }
   };
 
   const speakDescription = () => {
@@ -60,7 +80,7 @@ const Games = () => {
         </div>
       ) : (
         <div className="p-10 bg-gray-100 lg:rounded">
-          <p className="text-xl text-black mb-4">Congratulations! You've completed the Games.</p>
+          <p className="text-xl text-black mb-4">Congratulations! You've completed the game.</p>
           <p className="text-xl text-black mb-4">Your Score: {score}</p>
         </div>
       )}
