@@ -1,5 +1,6 @@
 import React from 'react'
-
+import AdultHome from '../../AutismAppPages/AdultHome'
+import App from '../../App'
 const Features = () => {
   return (
     <div className="bg-white" style={{ backgroundColor: "#0d87f430" }}>
@@ -45,7 +46,7 @@ const Features = () => {
           <img src="https://images.unsplash.com/photo-1687360441027-27e70655b27e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1883&q=80" alt="Two Autistic friends sitting outside and lauging at their phones" className="rounded-lg bg-gray-100" />
           <img src="https://images.unsplash.com/photo-1687360440100-d4fbdc03bff9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="A self potrait of Autistic woman" className="rounded-lg bg-gray-100" />
         </div>
-      </div>
+    </div>
     </div>
 
   )
