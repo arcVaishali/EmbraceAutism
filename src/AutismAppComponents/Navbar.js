@@ -28,7 +28,7 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Home</Link>
-          <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">About Us</Link>
+          <Link to="/About-us" className="text-sm font-semibold leading-6 text-gray-900">About Us</Link>
           <Link to="/child" className="text-sm font-semibold leading-6 text-gray-900">Child</Link>
               <Link to="/adult" className="text-sm font-semibold leading-6 text-gray-900">Adult</Link>
         </div>
