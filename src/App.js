@@ -5,6 +5,7 @@ import react from '@heroicons/react';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Landing from "./AutismAppPages/AustismAppLanding";
 import AdultHome from "./AutismAppPages/AdultHome";
+import ShareStories from './AdultSection/Pages/ShareStories';
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
 
       {/* If user chooses to adult section then=> */}
       <AdultHome/>
+      {/* <ViewEventsAdultSection/> */}
+      <ShareStories/>
     </div>
   );
 }

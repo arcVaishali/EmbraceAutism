@@ -25,7 +25,7 @@ const Navbar = () => {
           <div className="hidden lg:flex lg:gap-x-12">
             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Home</a>
             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Features</a>
-            <a href="../Pages/ViewEventsAdultSection" className="text-sm font-semibold leading-6 text-gray-900">Community Events</a>
+            <a href="" className="text-sm font-semibold leading-6 text-gray-900">Community Events</a>
             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Volunteer</a>
             <a href="#" className="text-sm font-semibold leading-6 text-gray-900">Share Stories</a>
           </div>
