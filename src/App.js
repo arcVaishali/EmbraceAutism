@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
 import react from '@heroicons/react';
@@ -9,12 +8,9 @@ import AdultHome from "./AutismAppPages/AdultHome";
 function App() {
   return (
     <div>
-      <div>
-      
-      </div>
       <Router>
         <Routes>
-        
+        <Route path='/' element={<Landing/>} exact/>
           <Route path="/adult" element={<AdultHome />} exact />
         </Routes>
       </Router>
