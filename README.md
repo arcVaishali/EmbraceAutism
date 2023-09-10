@@ -25,7 +25,11 @@ For Adults:
 
 2. Community Support: We provide a supportive online community where adults can share their experiences, seek advice, and connect with others facing similar challenges and triumphs.
 
-3. Mentorship Programs: Our mentorship programs are facilitated by experts in the field of autism. These programs offer personalized guidance, career advice, and life skills coaching to help adults with autism achieve their goals and maximize their potential.
+3. Story Sharing: We provide a supportive space for autistic adults to share their stories, ideas and feelings on various arena of topics ranging from self-care to status-updating. People can create their own stories too and view other's stories too.
+
+4. Mentorship Programs: Our mentorship programs are facilitated by experts in the field of autism. These programs offer personalized guidance, career advice, and life skills coaching to help adults with autism achieve their goals and maximize their potential.
+
+5. Community Events : We also provide space for various communities to post about any upcoming community events in their locale, autistic users can RSVP nearest community meetup and share their thoughts.
 
 Inclusivity is at the heart of our website, as we aim to empower both children and adults within the autism community, fostering growth, learning, and a sense of belonging.
 
