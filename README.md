@@ -16,7 +16,7 @@ Our website is designed to cater to both children and adults within the autism c
 For Children:
 1. Engaging Gamified Platform: We've developed an interactive, gamified platform tailored to children on the autism spectrum. This platform enhances their learning experiences through educational games, puzzles, and engaging activities designed to promote cognitive development and social skills.
 
-2. Video Sessions: We provide a library of video sessions specifically curated to meet the educational and developmental needs of children with autism. These sessions cover a wide range of topics, including communication skills, sensory processing, and emotional regulation.
+2. Video Sessions and Quizzes: We provide a library of video sessions specifically curated to meet the educational and developmental needs of children with autism. These sessions cover a wide range of topics, including communication skills, sensory processing, and emotional regulation.
 
 3. Interactive Sing-Alongs: Our platform includes interactive sing-alongs, fostering a fun and immersive way for children to engage with music while improving their communication and social interaction abilities.
 
@@ -32,6 +32,13 @@ For Adults:
 5. Community Events : We also provide space for various communities to post about any upcoming community events in their locale, autistic users can RSVP nearest community meetup and share their thoughts.
 
 Inclusivity is at the heart of our website, as we aim to empower both children and adults within the autism community, fostering growth, learning, and a sense of belonging.
+
+## How to get started 
+After forking and cloning the repo, run the following command to get started
+```
+npm install
+
+```
 
 ## How we built it
 We used React and Tailwind CSS to build the interactive framework, Figma to create a beautiful design, OAuth and RandomUserAPI to implement authentication, Vercel to deploy our website and Git-GitHub to host or code and collaborate with team mates. We chose light green color palette for the Kid's version and light blue color palette for the Adult's version. 
