@@ -19,12 +19,12 @@ function App() {
       </Routes>
 
 
-      {/* <AdultHome/>
+      <AdultHome/>
       <ViewEventsAdultSection/>
       <Volunteer />
       <VolunteerForm/>
       <ShareStories /> 
-      <Features/> */}
+      <Features/>
     </div>
 
   );
