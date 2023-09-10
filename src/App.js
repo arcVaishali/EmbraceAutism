@@ -4,6 +4,8 @@ import react from '@heroicons/react';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Landing from "./AutismAppPages/AustismAppLanding";
 import AdultHome from "./AutismAppPages/AdultHome";
+import Footer from './AutismAppComponents/Footer';
+import ChildHome from './AutismAppPages/ChildHome';
 import ShareStories from './AdultSection/Pages/ShareStories';
 import Volunteer from './AdultSection/Pages/Volunteer';
 import Features from "./AdultSection/Pages/Features";
@@ -11,19 +13,14 @@ import Features from "./AdultSection/Pages/Features";
 function App() {
   return (
     <div>
-      <Routes>
-        <Route path='/' element={<Landing />} exact />
-        <Route path="/adult" element={<AdultHome />} exact />
-      </Routes>
-
-
-      {/* <AdultHome/>
-      <ViewEventsAdultSection/>
-      <Volunteer />
-      <ShareStories /> 
-      <Features/> */}
-    </div>
-
+      <Router>
+        <Routes>
+          <Route path='/' element={<Landing />} exact />
+          <Route path="/adult" element={<AdultHome />} exact />
+          <Route path="/child" element={<ChildHome />} exact />
+        </Routes>
+    <div><Footer/></div>
+    </Router>
   );
 }
 
