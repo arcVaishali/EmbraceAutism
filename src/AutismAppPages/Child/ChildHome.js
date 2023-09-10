@@ -5,6 +5,8 @@ import { GiPuzzle } from 'react-icons/gi';
 import { FiPlayCircle } from 'react-icons/fi';
 import { ImFilm } from 'react-icons/im';
 import Navbar from '../../AutismAppComponents/Navbar';
+import ButtonSecondary from '../../AutismAppComponents/ButtonSecondary';
+import ButtonPrimary from '../../AutismAppComponents/ButtonPrimary';
 
 const ChildHome = () => {
   const buttonVariants = {
@@ -53,6 +55,11 @@ const ChildHome = () => {
             </motion.div>
           </Link>
         </div>
+      </div>
+      <div className='p-6'>
+        <Link to="/">
+          <ButtonPrimary text="Go Back to Homepage" />
+        </Link>
       </div>
     </div>
   );

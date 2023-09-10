@@ -13,6 +13,7 @@ import Puzzles from './AutismAppPages/Child/Puzzles';
 import Games from './AutismAppPages/Child/Games';
 import VolunteerForm from './AdultSection/Pages/VolunteerForm'
 import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
+import CourseCompletion from './AutismAppPages/Child/CourseCompletion';
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
           <Route path="/adult" element={<AdultHome />} exact />
           <Route path="/child" element={<ChildHome />} exact />
           <Route path="/games" element={<Games />} exact />
-          <Route path="/videos" element={<Videos />} exact />
+          <Route path="/child/videos" element={<Videos />} exact />
           <Route path="/puzzles" element={<Puzzles />} exact />
           <Route path='/adult/ViewEventsAdultSection' element={<ViewEventsAdultSection/>} exact/>
+          <Route path='/course-completed' element={<CourseCompletion/>} exact/>
         </Routes>
         <div>
           <Footer />
