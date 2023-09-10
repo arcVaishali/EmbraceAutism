@@ -2,6 +2,7 @@ import React from 'react'
 import Navbar from '../AdultSection/components/Navbar'
 import Haze from '../AdultSection/components/Haze'
 import HazeStyle2 from '../AdultSection/components/HazeStyle2'
+import Features from '../AdultSection/Pages/Features'
 import { Link } from 'react-router-dom'
 
 const AdultHome = () => {
@@ -30,11 +31,7 @@ const AdultHome = () => {
         </div>
       </div>
       <HazeStyle2/>
-      {/* <ViewEventsAdultSection/>
-      <Volunteer />
-      <VolunteerForm/>
-      <ShareStories /> 
-      <Features/>  */}
+      <Features/>
     </div>
   )
 }

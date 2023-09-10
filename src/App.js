@@ -25,9 +25,10 @@ function App() {
           <Route path="/adult" element={<AdultHome />} exact />
           <Route path="/child" element={<ChildHome />} exact />
           <Route path="/games" element={<Games />} exact />
-          <Route path="/child/videos" element={<Videos />} exact />
+          <Route path="/videos" element={<Videos />} exact />
           <Route path="/puzzles" element={<Puzzles />} exact />
           <Route path='/adult/ViewEventsAdultSection' element={<ViewEventsAdultSection/>} exact/>
+          <Route path="/child/videos" element={<Videos />} exact />
           <Route path='/course-completed' element={<CourseCompletion/>} exact/>
         </Routes>
         <div>
