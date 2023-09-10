@@ -7,6 +7,8 @@ import AdultHome from "./AutismAppPages/AdultHome";
 import ShareStories from './AdultSection/Pages/ShareStories';
 import Volunteer from './AdultSection/Pages/Volunteer';
 import Features from "./AdultSection/Pages/Features";
+import VolunteerForm from './AdultSection/Pages/VolunteerForm'
+
 
 function App() {
   return (
@@ -20,6 +22,7 @@ function App() {
       {/* <AdultHome/>
       <ViewEventsAdultSection/>
       <Volunteer />
+      <VolunteerForm/>
       <ShareStories /> 
       <Features/> */}
     </div>
