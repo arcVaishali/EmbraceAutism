@@ -28,6 +28,11 @@ function App() {
           <Route path="/videos" element={<Videos />} exact />
           <Route path="/puzzles" element={<Puzzles />} exact />
           <Route path='/adult/ViewEventsAdultSection' element={<ViewEventsAdultSection/>} exact/>
+          <Route path='/adult/Volunteer' element={<Volunteer/>} exact/>
+          <Route path='/adult/Volunteer/VolunteerForm' element={<VolunteerForm/>} exact/>
+          <Route path='/adult/Volunteer/VolunteerForm/Volunteer' element={<Volunteer/>} exact/>
+          <Route path='/adult/Features' element={<Features/>} exact/>
+          <Route path='/adult/ShareStories' element={<ShareStories/>} exact/>
           <Route path="/child/videos" element={<Videos />} exact />
           <Route path='/course-completed' element={<CourseCompletion/>} exact/>
         </Routes>
