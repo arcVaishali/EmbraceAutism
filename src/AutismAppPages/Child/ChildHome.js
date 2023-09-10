@@ -5,6 +5,8 @@ import { GiPuzzle } from 'react-icons/gi';
 import { FiPlayCircle } from 'react-icons/fi';
 import { ImFilm } from 'react-icons/im';
 import Navbar from '../../AutismAppComponents/Navbar';
+import ButtonSecondary from '../../AutismAppComponents/ButtonSecondary';
+import ButtonPrimary from '../../AutismAppComponents/ButtonPrimary';
 
 const ChildHome = () => {
   const buttonVariants = {
@@ -19,7 +21,7 @@ const ChildHome = () => {
         <h1 className="text-4xl font-bold text-black mb-8">Welcome to the Child Section</h1>
         <p className="text-xl text-black mb-4">Explore fun and educational content designed just for kids!</p>
         <div className="flex flex-col items-center justify-center space-y-4">
-          <Link to="/games">
+          <Link to="games">
             <motion.div
               className="flex items-center bg-blue-500 hover:bg-blue-600 text-red-500 font-semibold py-2 px-4 rounded-full text-lg transition-all duration-300"
               variants={buttonVariants}
@@ -53,6 +55,11 @@ const ChildHome = () => {
             </motion.div>
           </Link>
         </div>
+      </div>
+      <div className='p-6'>
+        <Link to="/">
+          <ButtonPrimary text="Go Back to Homepage" />
+        </Link>
       </div>
     </div>
   );
