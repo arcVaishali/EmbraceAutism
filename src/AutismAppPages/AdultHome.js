@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 
 const AdultHome = () => {
   return (
-    <div className="relative isolate px-6 pt-14 lg:px-8">
+    <div className="relative isolate px-6 pt-14 lg:px-8" style={{backgroundColor:"#0d87f430"}}>
       <Navbar />
       <Haze/>
       <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-20">
