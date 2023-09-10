@@ -12,10 +12,12 @@ import Features from "./AdultSection/Pages/Features";
 import Videos from './AutismAppPages/Child/Videos';
 import Puzzles from './AutismAppPages/Child/Puzzles';
 import Games from './AutismAppPages/Child/Games';
+import VolunteerForm from './AdultSection/Pages/VolunteerForm'
 
 function App() {
   return (
     <div>
+
       <Router>
         <Routes>
           <Route path='/' element={<Landing />} exact />
@@ -29,6 +31,15 @@ function App() {
           <Footer />
         </div>
       </Router>
+
+      {/* // <AdultHome/>
+      // <ViewEventsAdultSection/>
+      // <Volunteer />
+      // <VolunteerForm/>
+      // <ShareStories /> 
+      // <Features/> */}
+
+
     </div>
   );
 }
