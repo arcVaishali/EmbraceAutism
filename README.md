@@ -1,4 +1,81 @@
-# Getting Started with Create React App
+## DIRECTION - 
+
+> Goto src/AdultSection and create Adults Portal Pages and Components
+
+> Goto src/KidsSection and create Kids Portal Pages and Components 
+
+> Goto src/AutismAppComponents to create components for Landing Page of Embrace Autism
+
+> Goto src/AutismAppPages to create pages/section for Embrace Autism 
+
+## MAP - 
+
+- [ ] Autism App Landing Page - [Autism App Landing Page](src/AutismAppPages/AustismAppLanding.js)
+
+    + [ ] Autism App Landing Page COMPONENTS - [Autism App Components](src/AutismAppComponents)
+
+        - [ ] Navbar - [Navbar](src/AutismAppComponents/Navbar.js)
+        - [ ] Footer -[Footer](src/AutismAppComponents/Footer.js)
+        - [ ] ButtonPrimary -[ButtonP](src/AutismAppComponents/ButtonPrimary.js)
+        - [ ] ButtonSecondary -[ButtonS](src/AutismAppComponents/ButtonSecondary.js)
+        - [ ] Card - [Card](src/AutismAppComponents/Card.js)
+        - [ ] MoveToTop- [MoveToTop](src/AutismAppComponents/MoveToTop.js)
+
+    + [ ] Autism App PAGES
+        - [ ] About 
+        - [ ] Features  (Purpose / Mission)
+        - [ ] About Kid Section 
+        - [ ] About Adult Section 
+        - [ ] Signup/Login 
+        - [ ] Community
+        + [ ] Link to Adult Section Home Page - [Adult Home](src/AutismAppPages/AdultHome.js)
+            - [ ] Adult Section COMPONENTS
+                + [ ] Navbar - [Navbar](src/AdultSection/components/Navbar.js)
+                + [ ]
+                + [ ]
+            - [ ] Adult Section PAGES
+                + [ ] Home 
+                + [ ] Features 
+                + [ ] Community Events - [View Community Events](src/AdultSection/Pages/ViewEventsAdultSection.js)
+                + [ ] Volunteer - [Volunteering]()
+                + [ ] Share Stories - [Share Stories]() 
+        + [ ] Link to Kid Section Home Page - [Kid Home](src/AutismAppPages/ChildHome.js) 
+            - [ ] COMPONENTS 
+                + [ ] Navbar 
+                + [ ] 
+                + [ ]
+            - [ ] PAGES
+                + [ ] Home 
+                + [ ] Learn 
+                + [ ] Play 
+                + [ ] Flashcards 
+                + [ ] Sing along 
+         
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +144,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->

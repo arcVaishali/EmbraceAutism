@@ -1,9 +1,10 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
 import react from '@heroicons/react';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Landing from "./pages/Landing";
+import Landing from "./AutismAppPages/AustismAppLanding";
+import AdultHome from "./AutismAppPages/AdultHome";
 
 function App() {
   return (
@@ -17,7 +18,8 @@ function App() {
         </Routes>
       </Router>
 
-      <ViewEventsAdultSection/>
+      {/* If user chooses to adult section then=> */}
+      <AdultHome/>
     </div>
   );
 }
