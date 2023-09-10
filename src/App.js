@@ -32,14 +32,6 @@ function App() {
         </div>
       </Router>
 
-      {/* // <AdultHome/>
-      // <ViewEventsAdultSection/>
-      // <Volunteer />
-      // <VolunteerForm/>
-      // <ShareStories /> 
-      // <Features/> */}
-
-
     </div>
   );
 }

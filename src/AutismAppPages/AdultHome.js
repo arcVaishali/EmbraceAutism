@@ -30,6 +30,11 @@ const AdultHome = () => {
         </div>
       </div>
       <HazeStyle2/>
+      {/* <ViewEventsAdultSection/>
+      <Volunteer />
+      <VolunteerForm/>
+      <ShareStories /> 
+      <Features/>  */}
     </div>
   )
 }

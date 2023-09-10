@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="hidden lg:flex lg:gap-x-12">
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Home</Link>
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Features</Link>
-          <Link to="../Pages/ViewEventsAdultSection" className="text-sm font-semibold leading-6 text-gray-900">Community Events</Link>
+          <Link to={"../Pages/ViewEventsAdultSection"} className="text-sm font-semibold leading-6 text-gray-900">Community Events</Link>
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Volunteer</Link>
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Share Stories</Link>
         </div>
