@@ -37,7 +37,10 @@ Inclusivity is at the heart of our website, as we aim to empower both children a
 After forking and cloning the repo, run the following command to get started
 ```
 npm install
-
+```
+---
+```
+npm start 
 ```
 
 ## How we built it
@@ -84,3 +87,7 @@ Thank you for joining us on this transformative journey. Together, we can create
 With heartfelt gratitude,
 
 Embrace Autism's Developer team  
+
+```
+Happy Coding!
+```
