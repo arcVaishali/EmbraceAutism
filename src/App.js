@@ -1,5 +1,4 @@
 import './App.css';
-import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
 import react from '@heroicons/react';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Landing from "./AutismAppPages/AustismAppLanding";
@@ -13,6 +12,7 @@ import Videos from './AutismAppPages/Child/Videos';
 import Puzzles from './AutismAppPages/Child/Puzzles';
 import Games from './AutismAppPages/Child/Games';
 import VolunteerForm from './AdultSection/Pages/VolunteerForm'
+import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
 
 function App() {
   return (
@@ -25,13 +25,17 @@ function App() {
           <Route path="/child" element={<ChildHome />} exact />
           <Route path="/games" element={<Games />} exact />
           <Route path="/videos" element={<Videos />} exact />
+<<<<<<< HEAD
           <Route path="/puzzles" element={<Puzzles />} exact /> 
+=======
+          <Route path="/puzzles" element={<Puzzles />} exact />
+          <Route path='/adult/ViewEventsAdultSection' element={<ViewEventsAdultSection/>} exact/>
+>>>>>>> c6a3f07186bb6c037fd2bebee85a27eed7496dab
         </Routes>
         <div>
           <Footer />
         </div>
       </Router>
-
     </div>
   );
 }

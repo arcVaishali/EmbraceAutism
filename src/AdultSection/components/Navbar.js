@@ -1,6 +1,6 @@
 import React from 'react'
 import ViewEventsAdultSection from '../Pages/ViewEventsAdultSection'
-import { Link } from 'react-router-dom'
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom'
 
 const Navbar = () => {
   return (
@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="hidden lg:flex lg:gap-x-12">
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Home</Link>
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Features</Link>
-          <Link to={"../Pages/ViewEventsAdultSection"} className="text-sm font-semibold leading-6 text-gray-900">Community Events</Link>
+          <Link to="ViewEventsAdultSection" className="text-sm font-semibold leading-6 text-gray-900">Community Events</Link>
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Volunteer</Link>
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Share Stories</Link>
         </div>
@@ -54,7 +54,7 @@ const Navbar = () => {
               <div className="space-y-2 py-6">
                 <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</Link>
                 <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</Link>
-                <Link to="../Pages/ViewEventsAdultSection" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Community Events</Link>
+                <Link to="ViewEventsAdultSection" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Community Events</Link>
                 <Link to="" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Volunteer</Link>
                 <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Share Stories</Link>
               </div>
@@ -67,7 +67,7 @@ const Navbar = () => {
         </div>
       </div>
     </header>
-
+  
   )
 }
 

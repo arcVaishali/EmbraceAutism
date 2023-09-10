@@ -1,5 +1,6 @@
 import React from 'react'
-
+import AdultHome from '../../AutismAppPages/AdultHome'
+import App from '../../App'
 const Features = () => {
   return (
     <div>
