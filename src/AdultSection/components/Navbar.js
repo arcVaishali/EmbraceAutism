@@ -23,10 +23,10 @@ const Navbar = () => {
         </div>
         <div className="hidden lg:flex lg:gap-x-12">
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Home</Link>
-          <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Features</Link>
+          <Link to="Features" className="text-sm font-semibold leading-6 text-gray-900">Features</Link>          
           <Link to="ViewEventsAdultSection" className="text-sm font-semibold leading-6 text-gray-900">Community Events</Link>
-          <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Volunteer</Link>
-          <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Share Stories</Link>
+          <Link to="Volunteer" className="text-sm font-semibold leading-6 text-gray-900">Volunteer</Link>
+          <Link to="ShareStories" className="text-sm font-semibold leading-6 text-gray-900">Share Stories</Link>
         </div>
         <div className="hidden lg:flex lg:flex-1 lg:justify-end">
           <Link to="/" className="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></Link>
@@ -53,10 +53,10 @@ const Navbar = () => {
             <div className="-my-6 divide-y divide-gray-500/10">
               <div className="space-y-2 py-6">
                 <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Home</Link>
-                <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</Link>
+                <Link to="Features" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Features</Link>
                 <Link to="ViewEventsAdultSection" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Community Events</Link>
-                <Link to="" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Volunteer</Link>
-                <Link to="/" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Share Stories</Link>
+                <Link to="Volunteer" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Volunteer</Link>
+                <Link to="ShareStories" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Share Stories</Link>
               </div>
               <div className="py-6">
                 <Link to="/" className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Log in</Link>
@@ -67,7 +67,7 @@ const Navbar = () => {
         </div>
       </div>
     </header>
-  
+
   )
 }
 
