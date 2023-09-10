@@ -4,6 +4,9 @@ import App from '../../App'
 const Features = () => {
   return (
     <div>
+      <br/>
+      <br/>
+      <br/>
       <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl" style={{ textAlign: "center" }}>Features</h2>
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
