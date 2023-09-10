@@ -86,7 +86,7 @@ const Videos = () => {
     };
 
     return (
-        <div className="bg-gradient-to-r from-[#12E0B7] to-[#07F76B]">
+        <div className="bg-gradient-to-r from-[#07f76b87] to-[#12e0b7ad] ">
             <div className="max-w-2xl mx-auto py-8">
                 <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
                     {currentVideo.title}
@@ -153,17 +153,29 @@ const Videos = () => {
                         </button>
                         <div className='flex'>
                         <Link to="/child">
-                            <div className='p-10 items-center'>
+                            <div style={{
+                                marginLeft:"12px",
+                                marginTop:"50px",
+                                marginBottom:"40px"
+                            }}>
                                 <ButtonPrimary text="Go Back to Home" />
                             </div>
                         </Link>
                         <Link to="/games">
-                            <div className='p-10 items-center'>
+                            <div style={{
+                                marginLeft:"60px",
+                                marginTop:"50px",
+                                marginBottom:"40px"
+                            }}>
                                 <ButtonPrimary text="Play Games" />
                             </div>
                         </Link>
                         <Link to="/puzzles">
-                            <div className='p-10 items-center'>
+                            <div style={{
+                                marginLeft:"60px",
+                                marginTop:"50px",
+                                marginBottom:"40px"
+                            }}>
                                 <ButtonPrimary text="Solve Puzzles" />
                             </div>
                         </Link>

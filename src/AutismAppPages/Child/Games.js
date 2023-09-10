@@ -4,6 +4,7 @@ import ball from '../../assets/cartoon characters/objects/ball.png';
 import car from '../../assets/cartoon characters/objects/car.png';
 import book from '../../assets/cartoon characters/objects/book.png';
 import { Link } from 'react-router-dom';
+import ButtonPrimary from '../../AutismAppComponents/ButtonPrimary';
 
 
 const Games = () => {
@@ -88,10 +89,10 @@ const Games = () => {
     };
 
     return (
-        <div className="bg-gradient-to-r from-[#12E0B7] to-[#07F76B] min-h-screen flex flex-col items-center justify-center">
-            <h1 className="text-4xl font-bold text-white mb-8">Guess the Object</h1>
+        <div className="bg-gradient-to-r from-[#07f76b87] to-[#12e0b7ad] min-h-screen flex flex-col items-center justify-center">
+            <h1 className="text-4xl font-bold text-black mb-8">Guess the Object</h1>
             {currentObjectIndex < objects.length ? (
-                <div className="p-10 bg-gray-100 lg:rounded">
+                <div className="p-10 bg-gradient-to-r from-[#12e0b7ab] to-[#0d2cf447] border-[#12e0b77a] lg:rounded">
                     <div className="object-image">
                         <img
                         className='h-20'
@@ -107,20 +108,22 @@ const Games = () => {
                     <button
                         onClick={handleListening}
                         disabled={listening}
-                        className={`${listening ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
-                            } text-red-500 font-semibold py-2 px-4 rounded-full text-lg transition-all duration-300 mt-4`}
+                        className={`${listening ? 'bg-white' : 'bg-blue-500 hover:bg-blue-600'
+                            } text-red-500 font-bold text-l py-2 px-4 rounded-full text-lg transition-all duration-300 mt-4`}
                     >
                         {listening ? 'Listening...' : 'Start Listening'}
                     </button>
                 </div>
             ) : (
-                <div className="p-10 bg-gray-100 lg:rounded">
+                <div className="p-10 bg-gradient-to-r from-[#12e0b7ab] to-[#0d2cf447] border-[#12e0b77a] lg:rounded">
                     <p className="text-xl text-black mb-4">Congratulations! You've completed the game.</p>
                     <p className="text-xl text-black mb-4">Your Score: 30/ 30</p>
                     {gameCompleted && <Confetti />}
                 </div>
             )}
-            <Link to="/child"><button>Go Back</button></Link>
+            <br/>
+            <br/>
+            <Link to="/child"><ButtonPrimary text="Go Back"/></Link>
         </div>
     );
 };

@@ -16,9 +16,11 @@ const ChildHome = () => {
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#12E0B7] to-[#07F76B] min-h-screen flex flex-col items-center justify-center">
-      <Navbar />
-      <div className='p-10 bg-gray-100 lg:rounded'>
+    <div className="bg-gradient-to-r from-[#07f76b87] to-[#12e0b7ad] min-h-screen flex flex-col items-center justify-center" >
+      {/* <Navbar /> */}
+      <br/>
+      <br/>
+      <div className='p-10 bg-gradient-to-r from-[#12e0b7ab] to-[#0d2cf447] border-[#12e0b77a] hover:shadow-lg lg:rounded'>
         <h1 className="text-4xl font-bold text-black mb-8">Welcome to the Child Section</h1>
         <p className="text-xl text-black mb-4">Explore fun and educational content designed just for kids!</p>
         <div className="flex flex-col items-center justify-center space-y-4">
@@ -31,19 +33,25 @@ const ChildHome = () => {
               initial="initial"
               whileHover="hover"
             >
-              <FaChild />
+              <FaChild style={{
+                marginLeft:"190px",
+                width:"50px",
+                height:"50px"
+              }}
+              />
             </motion.div>
           </Link>
           <div className='p-5 items-center align-center text-center'>
             <div>
               <Link to="/games">
                 <motion.div
-                  className="flex items-center bg-blue-500 hover:bg-blue-600 text-red-500 font-semibold py-2 px-4 rounded-full text-lg transition-all duration-300"
+                  className="flex items-center bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full hover:bg-blue-600 text-red-500 font-semibold py-2 px-4 rounded-full text-lg transition-all duration-300"
                   variants={buttonVariants}
+                  style={{marginBottom:"15px"}}
                   initial="initial"
                   whileHover="hover"
                 >
-                  <FiPlayCircle className="mr-2 text-xl" />
+                  <FiPlayCircle className="mr-2 text-xl"/>
                   Play Games
                 </motion.div>
               </Link>
@@ -51,8 +59,9 @@ const ChildHome = () => {
             <div>
               <Link to="videos">
                 <motion.div
-                  className="flex items-center text-blue-500 hover:text-blue-600 text-lg transition-all duration-300"
+                  className="flex items-center bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-4 rounded-full hover:text-blue-600 text-lg transition-all duration-300"
                   variants={buttonVariants}
+                  style={{marginBottom:"15px"}}
                   initial="initial"
                   whileHover="hover"
                 >
@@ -84,6 +93,9 @@ const ChildHome = () => {
           <ButtonPrimary text="Go Back to Homepage" />
         </Link>
       </div>
+      <br/>
+      <br/>
+      <br/>
     </div>
   );
 };
