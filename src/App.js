@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Landing from "./AutismAppPages/AustismAppLanding";
 import AdultHome from "./AutismAppPages/AdultHome";
 import Footer from './AutismAppComponents/Footer';
+import ChildHome from './AutismAppPages/ChildHome';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing />} exact />
           <Route path="/adult" element={<AdultHome />} exact />
+          <Route path="/child" element={<ChildHome />} exact />
         </Routes>
         <div>
           <Footer/>
