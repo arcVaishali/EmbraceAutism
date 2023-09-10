@@ -1,30 +1,28 @@
-import React from 'react';
-import { useAuth0 } from '@auth0/auth0-react';
-import Confetti from 'react-confetti';
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import Confetti from "react-confetti";
+import ButtonPrimary from "../../AutismAppComponents/ButtonPrimary";
+import { Link } from "react-router-dom";
 
 const CourseCompletion = () => {
-    const { user } = useAuth0(); 
 
     return (
         <div className="bg-gradient-to-r from-[#12E0B7] to-[#07F76B]">
             <div className="max-w-2xl mx-auto py-8">
                 <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-                    Congratulations, {user.name}!
+                    Congratulations!
                 </h1>
                 <div className="mt-6">
                     <div className="bg-white p-8 rounded-lg shadow-lg text-center">
                         <h2 className="text-2xl font-semibold text-gray-900">
                             Course Completion Certificate
                         </h2>
-                        <Confetti
-                            width={window.innerWidth}
-                            height={window.innerHeight}
-                        />
+                        <Confetti width={window.innerWidth} height={window.innerHeight} />
                         <p className="mt-4 text-lg text-gray-600">
-                            This is to certify that {user.name} has successfully completed the course.
+                            This is to certify that John Doe has successfully completed the
+                            course.
                         </p>
-                        <div className="mt-6">
-                        </div>
+                        <div className="mt-6"></div>
                         <div className="mt-6 flex justify-center">
                             <a
                                 href={`https://twitter.com/intent/tweet?text=I%20just%20completed%20a%20course%20on%20XYZ%20and%20earned%20a%20certificate!%20%23CourseCompletion`}
@@ -43,6 +41,7 @@ const CourseCompletion = () => {
                                 Share on Facebook
                             </a>
                         </div>
+                        <Link to="/">Go back to Home</Link>
                     </div>
                 </div>
             </div>
