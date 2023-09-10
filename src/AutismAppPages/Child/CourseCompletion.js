@@ -5,13 +5,12 @@ import ButtonPrimary from "../../AutismAppComponents/ButtonPrimary";
 import { Link } from "react-router-dom";
 
 const CourseCompletion = () => {
-    const { user } = useAuth0();
 
     return (
         <div className="bg-gradient-to-r from-[#12E0B7] to-[#07F76B]">
             <div className="max-w-2xl mx-auto py-8">
                 <h1 className="text-4xl font-bold text-gray-900 sm:text-5xl">
-                    Congratulations, {user.name}!
+                    Congratulations!
                 </h1>
                 <div className="mt-6">
                     <div className="bg-white p-8 rounded-lg shadow-lg text-center">
@@ -20,7 +19,7 @@ const CourseCompletion = () => {
                         </h2>
                         <Confetti width={window.innerWidth} height={window.innerHeight} />
                         <p className="mt-4 text-lg text-gray-600">
-                            This is to certify that {user.name} has successfully completed the
+                            This is to certify that John Doe has successfully completed the
                             course.
                         </p>
                         <div className="mt-6"></div>
