@@ -34,7 +34,7 @@ const ChildHome = () => {
               <FaChild />
             </motion.div>
           </Link>
-          <div className='items-center align-center text-center'>
+          <div className='p-5 items-center align-center text-center'>
             <div>
               <Link to="/games">
                 <motion.div
