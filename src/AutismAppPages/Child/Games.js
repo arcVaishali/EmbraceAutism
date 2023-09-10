@@ -1,91 +1,128 @@
 import React, { useState, useEffect } from 'react';
+import Confetti from 'react-confetti'; 
+import ball from '../../assets/cartoon characters/objects/ball.png';
+import car from '../../assets/cartoon characters/objects/car.png';
+import book from '../../assets/cartoon characters/objects/book.png';
+import { Link } from 'react-router-dom';
+
 
 const Games = () => {
-  const [objects, setObjects] = useState([
-    { name: 'Ball', description: "It's round and bounces." },
-    { name: 'Car', description: 'It has four wheels and you can drive it.' },
-    { name: 'Book', description: 'You read it to learn new things.' },
-  ]);
+    const [objects, setObjects] = useState([
+        {
+            name: 'Ball',
+            description: "It's round and bounces.",
+            imageUrl: ball, 
+        },
+        {
+            name: 'Car',
+            description: 'It has four wheels and you can drive it.',
+            imageUrl: car, 
+        },
+        {
+            name: 'Book',
+            description: 'You read it to learn new things.',
+            imageUrl: book, 
+        },
+    ]);
 
-  const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [listening, setListening] = useState(false);
-  const [recognizer, setRecognizer] = useState(null);
+    const [currentObjectIndex, setCurrentObjectIndex] = useState(0);
+    const [score, setScore] = useState(0);
+    const [listening, setListening] = useState(false);
+    const [recognizer, setRecognizer] = useState(null);
+    const [transcript, setTranscript] = useState('');
+    const [gameCompleted, setGameCompleted] = useState(false); // Track if the game is completed
 
-  const loadRecognizer = () => {
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-    const recognition = new SpeechRecognition();
-    recognition.continuous = false; 
-    
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript.toLowerCase();
-      if (transcript.includes(objects[currentObjectIndex].name.toLowerCase())) {
-        setScore((prevScore) => prevScore + 1);
-      }
-      setListening(false);
-      setCurrentObjectIndex((prevIndex) => prevIndex + 1);
+    const loadRecognizer = () => {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+
+        recognition.continuous = false;
+        recognition.onresult = (event) => {
+            const recognizedTranscript = event.results[0][0].transcript.toLowerCase();
+            setTranscript(recognizedTranscript);
+            checkAnswer(recognizedTranscript);
+        };
+
+        recognition.onend = () => {
+            setListening(false);
+            setCurrentObjectIndex((prevIndex) => prevIndex + 1);
+        };
+
+        setRecognizer(recognition);
     };
 
-    recognition.onend = () => {
-      setListening(false);
-      setCurrentObjectIndex((prevIndex) => prevIndex + 1);
+    const checkAnswer = (recognizedTranscript) => {
+        const correctAnswer = objects[currentObjectIndex].name.toLowerCase();
+        setTranscript(recognizedTranscript);
+        if (recognizedTranscript.includes(correctAnswer)) {
+            setScore((prevScore) => prevScore + 1);
+        }
     };
 
-    setRecognizer(recognition);
-  };
+    useEffect(() => {
+        loadRecognizer();
+    }, []);
 
-  useEffect(() => {
-    loadRecognizer();
-  }, []);
+    useEffect(() => {
+        if (currentObjectIndex < objects.length) {
+            speakDescription();
+        } else {
+            setGameCompleted(true); // Mark the game as completed
+        }
+    }, [currentObjectIndex, objects]);
 
-  const handleListening = () => {
-    if (recognizer) {
-      setListening(true);
-      recognizer.start();
-    }
-  };
+    const handleListening = () => {
+        if (recognizer) {
+            setListening(true);
+            setTranscript('');
+            recognizer.start();
+        }
+    };
 
-  const speakDescription = () => {
-    const synth = window.speechSynthesis;
-    const utterance = new SpeechSynthesisUtterance(
-      `What is this? ${objects[currentObjectIndex].description}`
+    const speakDescription = () => {
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(
+            `What is this? ${objects[currentObjectIndex].description}`
+        );
+        synth.speak(utterance);
+    };
+
+    return (
+        <div className="bg-gradient-to-r from-[#12E0B7] to-[#07F76B] min-h-screen flex flex-col items-center justify-center">
+            <h1 className="text-4xl font-bold text-white mb-8">Guess the Object</h1>
+            {currentObjectIndex < objects.length ? (
+                <div className="p-10 bg-gray-100 lg:rounded">
+                    <div className="object-image">
+                        <img
+                        className='h-20'
+                            src={objects[currentObjectIndex].imageUrl}
+                            alt={objects[currentObjectIndex].name}
+                            style={{ maxWidth: '100%' }}
+                        />
+                    </div>
+                    <p className="text-xl text-black mb-4">
+                        Listen to the description and guess the object. Say the name when you're ready.
+                    </p>
+                    <p className="text-xl text-black mb-4">{transcript}</p>
+                    <button
+                        onClick={handleListening}
+                        disabled={listening}
+                        className={`${listening ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
+                            } text-red-500 font-semibold py-2 px-4 rounded-full text-lg transition-all duration-300 mt-4`}
+                    >
+                        {listening ? 'Listening...' : 'Start Listening'}
+                    </button>
+                </div>
+            ) : (
+                <div className="p-10 bg-gray-100 lg:rounded">
+                    <p className="text-xl text-black mb-4">Congratulations! You've completed the game.</p>
+                    <p className="text-xl text-black mb-4">Your Score: 30/ 30</p>
+                    {gameCompleted && <Confetti />}
+                </div>
+            )}
+            <Link to="/child"><button>Go Back</button></Link>
+        </div>
     );
-    synth.speak(utterance);
-  };
-
-  useEffect(() => {
-    if (currentObjectIndex < objects.length) {
-      speakDescription();
-    }
-  }, [currentObjectIndex, objects]);
-
-  return (
-    <div className="bg-gradient-to-r from-[#12E0B7] to-[#07F76B] min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-white mb-8">Guess the Object</h1>
-      {currentObjectIndex < objects.length ? (
-        <div className="p-10 bg-gray-100 lg:rounded">
-          <p className="text-xl text-black mb-4">
-            Listen to the description and guess the object. Say the name when you're ready.
-          </p>
-          <p className="text-xl text-black">Score: {score}</p>
-          <button
-            onClick={handleListening}
-            disabled={listening}
-            className={`${
-              listening ? 'bg-gray-500' : 'bg-blue-500 hover:bg-blue-600'
-            } text-red-500 font-semibold py-2 px-4 rounded-full text-lg transition-all duration-300 mt-4`}
-          >
-            {listening ? 'Listening...' : 'Start Listening'}
-          </button>
-        </div>
-      ) : (
-        <div className="p-10 bg-gray-100 lg:rounded">
-          <p className="text-xl text-black mb-4">Congratulations! You've completed the game.</p>
-          <p className="text-xl text-black mb-4">Your Score: {score}</p>
-        </div>
-      )}
-    </div>
-  );
 };
 
 export default Games;
