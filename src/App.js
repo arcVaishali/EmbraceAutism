@@ -9,9 +9,9 @@ import ChildHome from './AutismAppPages/Child/ChildHome';
 import ShareStories from './AdultSection/Pages/ShareStories';
 import Volunteer from './AdultSection/Pages/Volunteer';
 import Features from "./AdultSection/Pages/Features";
-import Games from './AutismAppPages/Child/Games';
 import Videos from './AutismAppPages/Child/Videos';
 import Puzzles from './AutismAppPages/Child/Puzzles';
+import Games from './AutismAppPages/Child/Games';
 
 function App() {
   return (
