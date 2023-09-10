@@ -4,6 +4,7 @@ import react from '@heroicons/react';
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Landing from "./AutismAppPages/AustismAppLanding";
 import AdultHome from "./AutismAppPages/AdultHome";
+import Footer from './AutismAppComponents/Footer';
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
           <Route path='/' element={<Landing />} exact />
           <Route path="/adult" element={<AdultHome />} exact />
         </Routes>
+        <div>
+          <Footer/>
+        </div>
       </Router>
     </div>
   );
