@@ -1,8 +1,43 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../AutismAppComponents/Navbar'
 import { Link } from 'react-router-dom'
+import { BiTargetLock, BiGlobe } from 'react-icons/bi';
+import { FaUserFriends, FaHandsHelping } from 'react-icons/fa';
+import { AnimatePresence, motion } from 'framer-motion';
 
-const Landing = () => {
+const AustismAppLanding = () => {
+  const testimonials = [
+    {
+      name: 'John Doe',
+      testimonial: 'I\'m amazed by the support and understanding I received from the EmpowerASD community. It has truly made a positive impact in my life.'
+    },
+    {
+      name: 'Jane Smith',
+      testimonial: 'Thanks to EmpowerASD, I was able to find resources and connect with others who share similar experiences. It has been a game changer for me.'
+    }
+  ];
+  const missionVariants = {
+    hidden: { opacity: 0, x: -100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+      },
+    },
+  };
+
+  const visionVariants = {
+    hidden: { opacity: 0, x: 100 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.8,
+      },
+    },
+  };
+
   return (
     <div>
       <Navbar />
@@ -30,8 +65,41 @@ const Landing = () => {
       <div className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]" aria-hidden="true">
         <div className="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#12E0B7] to-[#07F76B] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" }}></div>
       </div>
+      {/* Mission and Vision section */}
+      <div className="flex justify-center">
+        <motion.div
+          className="w-1/2 bg-white rounded-md shadow-md p-6 m-4"
+          variants={missionVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <div className="flex items-center justify-center">
+            <BiTargetLock className="text-4xl text-[#57C7FF]" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mt-4">Our Mission</h2>
+          <p className="text-gray-600 mt-2">
+            Our mission is to provide comprehensive support and resources to individuals on the autism spectrum, empowering them to reach their full potential and lead meaningful lives.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="w-1/2 bg-white rounded-md shadow-md p-6 m-4"
+          variants={visionVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <div className="flex items-center justify-center">
+            <BiGlobe className="text-4xl text-[#FF9335]" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mt-4">Our Vision</h2>
+          <p className="text-gray-600 mt-2">
+            Our vision is a world where individuals with autism are embraced, understood, and included, where they have equal opportunities, and where their unique strengths and talents are celebrated.
+          </p>
+        </motion.div>
+      </div>
+
     </div>
   )
-}
+};
 
-export default Landing
+export default AustismAppLanding;
