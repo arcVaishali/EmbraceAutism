@@ -16,9 +16,12 @@ function App() {
         <Route path="/adult" element={<AdultHome />} exact />
       </Routes>
 
+
+      {/* <AdultHome/>
+      <ViewEventsAdultSection/>
       <Volunteer />
       <ShareStories /> 
-      <Features/>
+      <Features/> */}
     </div>
 
   );

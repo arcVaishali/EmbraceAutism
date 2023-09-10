@@ -3,15 +3,22 @@ import { Link } from 'react-router-dom'
 
 const VolunteeringEvent = () => {
     return (
-        <Link to="/" className="group" style={{ backgroundColor: "#12e0b738", padding: "30px", borderRadius: "20px" }}>
-            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img src="https://images.unsplash.com/photo-1464998857633-50e59fbf2fe6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80" alt="Tall slender porcelain bottle with natural clay textured body and cork stopper." className="h-full w-full object-cover object-center group-hover:opacity-75" />
+        <div className="group relative lg:grid lg:grid-cols-2 lg:gap-x-6 lg:space-y-0" style={{backgroundColor:"#07a5f738", borderRadius: "10px", padding: "30px", marginTop: "20px" }}>
+            <div className="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+                <img src="https://plus.unsplash.com/premium_photo-1663090088315-c67572a7dc23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Collection of four insulated travel bottles on wooden shelf." className="h-full w-full object-cover object-center" />
             </div>
-            <h2 className="text-xl font-bold tracking-tight text-gray-700" style={{ textAlign: "center", margin: "5px" }}>Community Picnic</h2>
-            <h3 className="mt-4 text-sm text-gray-700"
-                style={{ marginBottom: "34px" }}>Join us this Saturday at Oakridge Park for a community picnic! This event, organized for autistic adults, promises a day of connection and fun. Enjoy games, music, and a chance to share your experiences.</h3>
-            <Link to="/" className="rounded-md bg-[#0D79F4] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">See more</Link>
-        </Link>
+            <div>
+                <h3 className="mt-6 text-2xl text-gray-900" style={{ marginBottom: "20px" }}>
+                    <Link to="/" href="#">
+                        <span className="absolute inset-0"></span>
+                        Join Us in Making Change Happen
+                    </Link>
+                </h3>
+                <p className="text-base text-gray-600" style={{marginBottom:"20px"}}>Make a difference today! Join hands with us and volunteer at our upcoming event. Together, we can create a positive impact in our community. Join our mission for change and be part of something meaningful. Your time and dedication can bring about real change. Act now!</p>
+
+                <Link to="/" className="rounded-md bg-[#0D79F4] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Contribute</Link>
+            </div>
+        </div>
     )
 }
 
