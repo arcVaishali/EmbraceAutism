@@ -17,11 +17,11 @@ function App() {
       </Routes>
 
 
-      <AdultHome/>
+      {/* <AdultHome/>
       <ViewEventsAdultSection/>
       <Volunteer />
       <ShareStories /> 
-      <Features/>
+      <Features/> */}
     </div>
 
   );
