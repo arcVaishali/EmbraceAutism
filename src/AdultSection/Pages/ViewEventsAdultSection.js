@@ -7,7 +7,9 @@ const ViewEventsAdultSection = () => {
     <div style={{backgroundColor: "#0d87f400"}}>
       <div className="bg-white" style={{ backgroundColor: "#0d87f430" }}>
         <div className="bg-white" style={{ backgroundColor: "#0d87f400"}}>
-
+          <br/>
+          <br/>
+          <br/>
           <h2 className="text-4xl font-bold text-gray-900" style={{ textAlign: "center" }}>Community Events</h2>
           <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 
