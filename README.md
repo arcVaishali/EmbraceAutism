@@ -28,7 +28,9 @@ For Adults:
 3. Mentorship Programs: Our mentorship programs are facilitated by experts in the field of autism. These programs offer personalized guidance, career advice, and life skills coaching to help adults with autism achieve their goals and maximize their potential.
 
 Inclusivity is at the heart of our website, as we aim to empower both children and adults within the autism community, fostering growth, learning, and a sense of belonging.
+
 ## How we built it
+We used React and Tailwind CSS to build the interactive framework, Figma to create a beautiful design, OAuth and RandomUserAPI to implement authentication, Vercel to deploy our website and Git-GitHub to host or code and collaborate with team mates. We chose light green color palette for the Kid's version and light blue color palette for the Adult's version. 
 
 ## Challenges we ran into
 During the hackathon, our team encountered challenges related to communication and alignment, which occasionally made it difficult to stay on the same page. However, we successfully overcame these hurdles by implementing a well-organized approach that involved task delegation and strategic collaboration, enabling us to efficiently develop and deploy Embrace Autism.
@@ -69,4 +71,5 @@ As developers, our aim is to create a space where knowledge is accessible, suppo
 Thank you for joining us on this transformative journey. Together, we can create a world where every individual on the autism spectrum is celebrated for their unique brilliance.
 
 With heartfelt gratitude,
-Embrace Autism's Developer team
+
+Embrace Autism's Developer team  
