@@ -19,8 +19,11 @@ function App() {
           <Route path="/adult" element={<AdultHome />} exact />
           <Route path="/child" element={<ChildHome />} exact />
         </Routes>
-    <div><Footer/></div>
-    </Router>
+        <div>
+          <Footer />
+        </div>
+      </Router>
+    </div>
   );
 }
 
