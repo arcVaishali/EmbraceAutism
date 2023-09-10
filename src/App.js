@@ -14,12 +14,10 @@ function App() {
       </div>
       <Router>
         <Routes>
-          <Route path="/" element={<Landing />} exact />
+        
+          <Route path="/adult" element={<AdultHome />} exact />
         </Routes>
       </Router>
-
-      {/* If user chooses to adult section then=> */}
-      <AdultHome/>
     </div>
   );
 }
