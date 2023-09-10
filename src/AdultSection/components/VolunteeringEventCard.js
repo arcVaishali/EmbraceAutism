@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import VolunteerForm from '../Pages/VolunteerForm'
 
 const VolunteeringEvent = () => {
     return (
@@ -16,7 +17,7 @@ const VolunteeringEvent = () => {
                 </h3>
                 <p className="text-base text-gray-600" style={{marginBottom:"20px"}}>Make a difference today! Join hands with us and volunteer at our upcoming event. Together, we can create a positive impact in our community. Join our mission for change and be part of something meaningful. Your time and dedication can bring about real change. Act now!</p>
 
-                <Link to="/" className="rounded-md bg-[#0D79F4] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Contribute</Link>
+                <Link to="../Pages/VolunteerForm" className="rounded-md bg-[#0D79F4] px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-100 hover:text-[#0D79F4] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Contribute</Link>
             </div>
         </div>
     )
