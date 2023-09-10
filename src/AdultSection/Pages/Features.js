@@ -7,36 +7,36 @@ const Features = () => {
       <h2 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-4xl" style={{ textAlign: "center" }}>Features</h2>
       <div className="mx-auto grid max-w-2xl grid-cols-1 items-center gap-x-8 gap-y-16 px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:grid-cols-2 lg:px-8">
         <div>
-            <h1 className="text-2xl font-bold">Embrace Autism: Advocating for Adult Autism</h1>
+          <h1 className="text-2xl font-bold">Embrace Autism: Advocating for Adult Autism</h1>
           <p className="mt-4 text-xl text-gray-500">
-          It carries a profound message of empowerment, community support, and advocacy. It emphasizes the importance of adults with autism embracing their unique strengths and using their voices to create positive change. The app's message is encapsulated in its tagline: "Empowering Voices, Building Bridges.
+            It carries a profound message of empowerment, community support, and advocacy. It emphasizes the importance of adults with autism embracing their unique strengths and using their voices to create positive change. The app's message is encapsulated in its tagline: "Empowering Voices, Building Bridges.
           </p>
           <dl className="mt-16 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-            <div className="border-t border-gray-200 pt-4" style={{backgroundColor:"#00ff5b14",padding:"30px", borderRadius:"5px"}}>
+            <div className="border-t border-gray-200 pt-4" style={{ backgroundColor: "#00ff5b14", padding: "30px", borderRadius: "5px" }}>
               <dt className="font-medium text-xl text-gray-900">Personalized Experience</dt>
               <dd className="mt-2 text-gray-500">Recognizing that each individual's needs and preferences are unique, the app allows users to customize their experience, ensuring that it aligns with their specific requirements and goals.</dd>
             </div>
-            <div className="border-t border-gray-200 pt-4" style={{backgroundColor:"#00ff5b14",padding:"30px", borderRadius:"5px"}}>
+            <div className="border-t border-gray-200 pt-4" style={{ backgroundColor: "#00ff5b14", padding: "30px", borderRadius: "5px" }}>
               <dt className="font-medium  text-xl text-gray-900">Discover and Attend</dt>
               <dd className="mt-2 text-gray-500">The app provides a centralized hub where adults can discover community events specifically focused on autism awareness and advocacy. Users can explore and attend events that resonate with their interests and goals.
               </dd>
             </div>
-            <div className="border-t border-gray-200 pt-4" style={{backgroundColor:"#00ff5b14",padding:"30px", borderRadius:"5px"}}>
+            <div className="border-t border-gray-200 pt-4" style={{ backgroundColor: "#00ff5b14", padding: "30px", borderRadius: "5px" }}>
               <dt className="font-medium  text-xl text-gray-900">Volunteer Opportunities</dt>
               <dd className="mt-2 text-gray-500">
                 Empowerment Through Giving Back: The app serves as a bridge between adults with autism and NGOs and organizations dedicated to autism support. Users can easily find volunteer opportunities, enabling them to give back to their communities and contribute to causes that matter to them.</dd>
             </div>
-            <div className="border-t border-gray-200 pt-4" style={{backgroundColor:"#00ff5b14",padding:"30px", borderRadius:"5px"}}>
+            <div className="border-t border-gray-200 pt-4" style={{ backgroundColor: "#00ff5b14", padding: "30px", borderRadius: "5px" }}>
               <dt className="font-medium  text-xl text-gray-900">Community Awareness Events</dt>
               <dd className="mt-2 text-gray-500">Supportive Community Forums,
                 Safe and Supportive Environment; The app features moderated forums where adults can engage in meaningful discussions about their experiences, challenges, and successes in a safe and supportive environment.
               </dd>
             </div>
-            <div className="border-t border-gray-200 pt-4" style={{backgroundColor:"#00ff5b14",padding:"30px", borderRadius:"5px"}}>
+            <div className="border-t border-gray-200 pt-4" style={{ backgroundColor: "#00ff5b14", padding: "30px", borderRadius: "5px" }}>
               <dt className="font-medium  text-xl text-gray-900">Peer Support</dt>
               <dd className="mt-2 text-gray-500">Users can connect with peers who understand their unique journey, providing a valuable network for mutual support and advice.</dd>
             </div>
-            <div className="border-t border-gray-200 pt-4" style={{backgroundColor:"#00ff5b14",padding:"30px", borderRadius:"5px"}}>
+            <div className="border-t border-gray-200 pt-4" style={{ backgroundColor: "#00ff5b14", padding: "30px", borderRadius: "5px" }}>
               <dt className="font-medium  text-xl text-gray-900">Story Sharing and Advocacy</dt>
               <dd className="mt-2 text-gray-500">Personal Narratives; Embrance Autism encourages adults on the spectrum to share their personal experiences, triumphs, and challenges. Users can craft and share their own narratives, fostering a sense of belonging within the community.</dd>
             </div>
