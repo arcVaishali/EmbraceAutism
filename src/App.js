@@ -6,6 +6,9 @@ import Landing from "./AutismAppPages/AustismAppLanding";
 import AdultHome from "./AutismAppPages/AdultHome";
 import Footer from './AutismAppComponents/Footer';
 import ChildHome from './AutismAppPages/ChildHome';
+import ShareStories from './AdultSection/Pages/ShareStories';
+import Volunteer from './AdultSection/Pages/Volunteer';
+import Features from "./AdultSection/Pages/Features";
 
 function App() {
   return (
@@ -16,11 +19,8 @@ function App() {
           <Route path="/adult" element={<AdultHome />} exact />
           <Route path="/child" element={<ChildHome />} exact />
         </Routes>
-        <div>
-          <Footer/>
-        </div>
-      </Router>
-    </div>
+    <div><Footer/></div>
+    </Router>
   );
 }
 
