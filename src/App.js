@@ -14,8 +14,13 @@ import Games from './AutismAppPages/Child/Games';
 import VolunteerForm from './AdultSection/Pages/VolunteerForm'
 import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
 import CourseCompletion from './AutismAppPages/Child/CourseCompletion';
+
+import About from './AutismAppPages/About';
+import Team from './AutismAppPages/Team';
+
 import Profile from './AutismAppPages/Profile';
 import Story from './AdultSection/components/Story';
+
 
 function App() {
   return (
@@ -36,8 +41,16 @@ function App() {
           <Route path='/adult/ShareStories' element={<ShareStories/>} exact/>
           <Route path="/child/videos" element={<Videos />} exact />
           <Route path='/course-completed' element={<CourseCompletion/>} exact/>
+
+          <Route path='/About-us' element={<About/>} exact/>
+          <Route path='/About-us/Home' element={<Landing/>} exact/>
+          <Route path='/About-us/child' element={<ChildHome/>} exact/>
+          <Route path='/About-us/adult' element={<AdultHome/>} exact/>
+          <Route path='/About-us/team' element={<Team/>} exact/>
+
           <Route path='/profile' element={<Profile/>} exact/>
           <Route path='/adult/ShareStories/story' element={<Story/>} exact/>
+
         </Routes>
         <div>
           <Footer />
