@@ -18,7 +18,6 @@ import CourseCompletion from './AutismAppPages/Child/CourseCompletion';
 function App() {
   return (
     <div>
-
       <Router>
         <Routes>
           <Route path='/' element={<Landing />} exact />
