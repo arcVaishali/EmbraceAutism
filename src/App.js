@@ -15,6 +15,7 @@ import VolunteerForm from './AdultSection/Pages/VolunteerForm'
 import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
 import CourseCompletion from './AutismAppPages/Child/CourseCompletion';
 import Profile from './AutismAppPages/Profile';
+import Story from './AdultSection/components/Story';
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/child/videos" element={<Videos />} exact />
           <Route path='/course-completed' element={<CourseCompletion/>} exact/>
           <Route path='/profile' element={<Profile/>} exact/>
+          <Route path='/adult/ShareStories/story' element={<Story/>} exact/>
         </Routes>
         <div>
           <Footer />
