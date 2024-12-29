@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Confetti from 'react-confetti';
 import { Link } from 'react-router-dom';
-import ButtonSecondary from '../../AutismAppComponents/ButtonSecondary';
-import ButtonPrimary from '../../AutismAppComponents/ButtonPrimary';
+import ButtonSecondary from '../AutismAppComponents/ButtonSecondary';
+import ButtonPrimary from '../AutismAppComponents/ButtonPrimary';
 
 const Puzzles = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
