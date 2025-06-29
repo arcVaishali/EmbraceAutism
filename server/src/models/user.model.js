@@ -71,10 +71,10 @@ userSchema.pre("deleteOne" , async function( next ) {
 })
 
 userSchema.methods.isPasswordCorrect = async function() {
-    return await bcrypt.compare( password , this.passoword )
+    return await bcrypt.compare( password , this.password )
     .then(
         ()=> {
-            console.log("BCRYPT: Operation was succesful");
+            console.log("BCRYPT: Operation was successful");
         },
         (err)=> {
             console.error("BCRYPT: Some Error Occurred" , err );
