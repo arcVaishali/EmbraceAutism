@@ -78,11 +78,18 @@ const Signup = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
-      .then(() => {
-        setSubmitted(true);
+      .then((res) => {
+        console.log(res);
+        if (res.ok) setSubmitted(true);
+        else {
+          setErrors({ ...errors , ["submissionError"] : res})
+          setSubmitted(false) ;
+        }
       })
-      .catch((e) => {
-        console.log("Some error occurred");
+      .catch((err) => {
+        setErrors({ ...errors , ["submissionError"] : err})
+        setSubmitted(false) ;
+        console.log("Error is" , err);
       });
   };
 
@@ -203,9 +210,11 @@ const Signup = () => {
                 name="submitted"
                 disabled = {!isFormValid}
           />
+          {errors.submissionError && <div className="text-xs text-red-600">{errors.submissionError}</div>}
         </form>
       ) : (
-        <div className="grid justify-center col-span-12">Registration successful, you can now <Link to="/login" className="underline text-blue">login</Link></div>
+        <div className="grid justify-center col-span-12">Registration successful, you can now <Link to="/login" className="underline text-blue">login</Link>.
+        Also don't forget to complete your profile.</div>
       )}
     </div>
   );

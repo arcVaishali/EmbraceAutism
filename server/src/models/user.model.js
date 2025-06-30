@@ -7,14 +7,21 @@ const userSchema = new Schema({
     username: {
         type : String,
         lowercase : true ,
-        required : true,
         unique : true 
     },
     email : {
         type : String ,
         required : true ,
     },
-    fullName : {
+    phoneNumber : {
+        type : Number ,
+        required : true ,
+    },
+    firstName : {
+        type : String ,
+        required : true ,
+    },
+    lastName : {
         type : String ,
         required : true ,
     },
@@ -29,7 +36,7 @@ const userSchema = new Schema({
     address : {
         type : String 
     },
-    type: {
+    userType: {
         type : String ,
         enums : [ "Adult" , "Child" ] 
     },
@@ -43,6 +50,10 @@ const userSchema = new Schema({
     }, 
     refreshToken : {
         type : String
+    },
+    termsAgreed : {
+        type: Boolean,
+        required: true
     }
 } , {timestamps : true}) ;
 
@@ -91,7 +102,7 @@ userSchema.methods.generateAccessTokens = function() {
             id : this._id,
             username : this.username ,
             email : this.email,
-            fullName : this.fullName 
+            fullName : this.firstName + "" + this.lastName 
         },
         process.env.ACCESS_TOKEN_SECRET ,
         {
