@@ -87,35 +87,30 @@ userSchema.pre("save", async function (next) {
       }
     )
     .catch(error => {
-      console.log("BCRYPT: Some error occurred");
+      console.log("BCRYPT: Some error occurred while hashing the password");
     });
   next();
 });
 
-userSchema.pre("deleteOne", async function (next) {
-  //delete this user's stories, campaigns and events
-
-  next();
-});
 
 userSchema.methods.isPasswordCorrect = async function (inputPassword) {
   return await bcrypt
-    .compare(inputPassword, this.password)
-    .then(
-      () => {
-        console.log("BCRYPT: Operation was successful");
-      },
-      (err) => {
-        console.error("BCRYPT: Some Error Occurred", err);
+  .compare(inputPassword, this.password)
+  .then(
+    () => {
+      console.log("BCRYPT: Operation was successful");
+    },
+    (err) => {
+      console.error("BCRYPT: Some Error Occurred While password comparison", err);
       }
     )
     .catch((err) => {
-      console.log("BCRYPT: Some error occurred");
+      console.log("BCRYPT: Some error occurred while checking password");
     });
-};
-
-userSchema.methods.generateAccessTokens = function () {
-  return jwt.sign(
+  };
+  
+  userSchema.methods.generateAccessTokens = function () {
+    return jwt.sign(
     {
       id: this._id,
       username: this.username,
@@ -140,6 +135,12 @@ userSchema.methods.generateRefreshTokens = function () {
     }
   );
 };
+
+userSchema.pre("deleteOne", async function (next) {
+  //delete this user's stories, campaigns and events
+
+  next();
+});
 
 const User = mongoose.model("Users", userSchema);
 module.exports = { User };

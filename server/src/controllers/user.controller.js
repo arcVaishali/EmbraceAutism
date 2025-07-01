@@ -76,6 +76,9 @@ const signup = asyncHandler(async (req, res) => {
   const existedUser = await User.findOne({ email: email });
   if (existedUser) {
     throw new ApiError("User already exists");
+    // return res
+    // .status(300)
+    // .json(new ApiError(200, "User already exists"));
   }
 
   const [username] = email.split("@");
