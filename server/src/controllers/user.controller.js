@@ -1,94 +1,109 @@
-const asyncHandler = require("../utils/asyncHandler")
-const ApiError = require("../utils/ApiError")
-const ApiResponse = require("../utils/ApiResponse")
-const User = require("../models/user.model")
+const asyncHandler = require("../utils/asyncHandler");
+const ApiError = require("../utils/ApiError");
+const ApiResponse = require("../utils/ApiResponse");
+const { User } = require("../models/user.model");
 
+const login = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
-const login = asyncHandler (async (req, res) => {
+  if (!email) {
+    throw new ApiError(400, "username or email is required");
+  }
 
-    const {email, password} = req.body
+  const user = await User.findOne(email);
 
-    if (!email) {
-        throw new ApiError(400, "username or email is required")
-    }
+  if (!user) {
+    throw new ApiError(404, "User does not exist");
+  }
 
-    const user = await User.findOne(email)
+  const isPasswordValid = await user.isPasswordCorrect(password);
 
-    if (!user) {
-        throw new ApiError(404, "User does not exist")
-    }
+  if (!isPasswordValid) {
+    throw new ApiError(401, "Invalid user credentials");
+  }
 
-   const isPasswordValid = await user.isPasswordCorrect(password)
+  const { accessToken, refreshToken } = await generateAccessAndRefreshTokens(
+    user._id
+  );
 
-   if (!isPasswordValid) {
-    throw new ApiError(401, "Invalid user credentials")
-    }
+  const loggedInUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
 
-   const {accessToken, refreshToken} = await generateAccessAndRefreshTokens(user._id)
+  const options = {
+    httpOnly: true,
+    secure: true,
+  };
 
-    const loggedInUser = await User.findById(user._id).select("-password -refreshToken")
-
-    const options = {
-        httpOnly: true,
-        secure: true
-    }
-
-    return res
+  return res
     .status(200)
     .cookie("accessToken", accessToken, options)
     .cookie("refreshToken", refreshToken, options)
     .json(
-        new ApiResponse(
-            200, 
-            {
-                user: loggedInUser, accessToken, refreshToken
-            },
-            "User logged In Successfully"
-        )
+      new ApiResponse(
+        200,
+        {
+          user: loggedInUser,
+          accessToken,
+          refreshToken,
+        },
+        "User logged In Successfully"
+      )
+    );
+});
+
+const signup = asyncHandler(async (req, res) => {
+  const {
+    firstName,
+    lastName,
+    password,
+    email,
+    phoneNumber,
+    DOB,
+    termsAgreed,
+  } = req.body;
+
+  console.log(password);
+
+  if (
+    [firstName, lastName, password, email, phoneNumber].some(
+      (field) => typeof field !== "string" || field.trim() === ""
     )
-})
+  ) {
+    throw new ApiError("One of the fields is empty");
+  }
 
-const signup = asyncHandler( async(req , res) => {
-    const {
-      firstName,
-      lastName,
-      password,
-      email,
-      phoneNumber,
-      termsAgreed,
-    } = req.body ;
+  const existedUser = await User.findOne({ email: email });
 
-    if (
-        [firstName , lastName , password , email , phoneNumber ].some( (field) => field?.trim() === "") 
-    ) {
-        throw new ApiError("One of the fields is empty") ;
-    }
+  if (existedUser) {
+    throw new ApiError("User already exists");
+  }
 
-    const existedUser = await User.findOne(email) ;
+  const [username] = email.split("@");
+  console.log( password ) ;
+  const user = await User.create({
+    firstName,
+    lastName,
+    password : password,
+    email,
+    phoneNumber,
+    DOB,
+    termsAgreed,
+    username,
+  });
 
-    if ( existedUser ) {
-        throw new ApiError("User already exists") ;
-    }
+//   console.log("I am here") ;
+  const createdUser = await User.findById(user._id).select(
+    "-password -refreshToken"
+  );
 
-    const user = await User.create({
-        firstName,
-        lastName ,
-        email, 
-        password,
-        username: email
-    })
+  if (!createdUser) {
+    throw new ApiError(500, "Something went wrong while registering the user");
+  }
 
-    const createdUser = await User.findById(user._id).select(
-        "-password -refreshToken"
-    )
+  return res
+    .status(201)
+    .json(new ApiResponse(200, createdUser, "User registered Successfully"));
+});
 
-    if (!createdUser) {
-        throw new ApiError(500, "Something went wrong while registering the user")
-    }
-
-    return res.status(201).json(
-        new ApiResponse(200, createdUser, "User registered Successfully")
-    )
-})
-
-module.exports = { login , signup }
+module.exports = { login, signup };

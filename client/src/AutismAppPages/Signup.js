@@ -6,6 +6,7 @@ const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [DOB, setDOB] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [termsAgreed, setTermsAgreed] = useState(false);
@@ -32,11 +33,14 @@ const Signup = () => {
       error.phoneNumber = "Invalid Phone Number";
     }
     if (touched.password && password.length < 8) {
-        console.log(password.length)
+      // console.log(password.length);
       error.password = "Password must be minimum of 8 characters";
     }
-    if (touched.confirmPassword && (confirmPassword.trim() !== password.trim())) {
+    if (touched.confirmPassword && confirmPassword.trim() !== password.trim()) {
       error.confirmPassword = "Passwords do not match.";
+    }
+    if ( touched.DOB && !DOB ) {
+      error.DOB = "Date of Birth is required" ;
     }
 
     setErrors(error);
@@ -45,9 +49,10 @@ const Signup = () => {
     const isEmailValid = email.includes("@");
     const isPasswordValid = password.length > 8;
     const isConfirmPasswordValid = password.trim() === confirmPassword.trim();
+    const isDOBValid = DOB !== "" ;
     const areNamesValid = firstName.trim() !== "" && lastName.trim() !== "";
     const isPhoneNumberValid = phoneNumber.length === 10;
-    const IsTermsAgreed = (termsAgreed === true);
+    const IsTermsAgreed = termsAgreed === true;
 
     setIsFormValid(
       isEmailValid &&
@@ -55,9 +60,26 @@ const Signup = () => {
         isConfirmPasswordValid &&
         areNamesValid &&
         isPhoneNumberValid &&
-        IsTermsAgreed
+        IsTermsAgreed &&
+        isDOBValid
     );
-  }, [firstName, lastName, email, phoneNumber, password , confirmPassword , termsAgreed]);
+  }, [
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    password,
+    DOB,
+    confirmPassword,
+    termsAgreed,
+    touched,
+    touched.firstName,
+    touched.lastName,
+    touched.email,
+    touched.phoneNumber,
+    touched.password,
+    touched.confirmPassword,
+  ]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,28 +90,32 @@ const Signup = () => {
       password,
       email,
       phoneNumber,
+      DOB,
       termsAgreed,
     };
 
-    
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL ;
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     fetch(`${API_BASE_URL}/users/signup`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
-      .then((res) => {
+      .then(async (res) => {
         console.log(res);
         if (res.ok) setSubmitted(true);
         else {
-          setErrors({ ...errors , ["submissionError"] : res})
-          setSubmitted(false) ;
+          const errorHtml = await res.text(); 
+          const errorMessageMatch = errorHtml.match(/<pre>(.*?)<\/pre>/s); 
+          const errorMessage = errorMessageMatch
+            ? errorMessageMatch[1].split("<br>")[0]
+            : "An error occurred"; 
+          setErrors({ ...errors, submissionError: "Something went wrong" });
+          console.log(errors);
+          setSubmitted(false);
         }
       })
       .catch((err) => {
-        setErrors({ ...errors , ["submissionError"] : err})
-        setSubmitted(false) ;
-        console.log("Error is" , err);
+        console.log("Error is", err);
       });
   };
 
@@ -105,7 +131,10 @@ const Signup = () => {
         User Registration
       </span>
       {!submitted ? (
-        <form className="grid grid-rows-1 justify-center col-start-4 col-span-6 p-5 mb-4 border-2 rounded-md" onSubmit={handleSubmit} >
+        <form
+          className="grid grid-rows-1 justify-center col-start-4 col-span-6 p-5 mb-4 border-2 rounded-md"
+          onSubmit={handleSubmit}
+        >
           <label className="block m-1 text-sm" for="firstName">
             First Name
           </label>
@@ -151,6 +180,21 @@ const Signup = () => {
             <div className="text-xs text-red-600">{errors.email}</div>
           )}
 
+          <label className="block m-1 text-sm" for="DOB">
+            Date of Birth
+          </label>
+          <input
+            className="rounded-sm m-1 border-2"
+            type="date"
+            id="DOB"
+            name={DOB}
+            onChange={(e) => setDOB(e.target.value)}
+            onBlur={() => handleBlur("DOB")}
+          />
+          {errors.DOB && (
+            <div className="text-xs text-red-600">{errors.DOB}</div>
+          )}
+
           <label className="block m-1 text-sm" for="PhoneNumber">
             Phone Number
           </label>
@@ -190,31 +234,45 @@ const Signup = () => {
           />
           {errors.confirmPassword && (
             <div className="text-xs text-red-600">{errors.confirmPassword}</div>
-          )} 
+          )}
 
           <div className="grid-cols-6">
             <input
-                className="col-span-2 m-2"
-                type="checkbox"
-                id="termsAgreed"
-                name="termsAgreed"
-                onChange={(e)=> handleTermsClick()}
+              className="col-span-2 m-2"
+              type="checkbox"
+              id="termsAgreed"
+              name="termsAgreed"
+              onChange={(e) => handleTermsClick()}
             />
-            <label className="col-span-4 m-2" for="termsAgreed"> Terms and Conditions</label>
+            <label className="col-span-4 m-2" for="termsAgreed">
+              {" "}
+              Terms and Conditions
+            </label>
           </div>
 
-          <input 
-                className={isFormValid ? "bg-green rounded-md border-2 m-2 p-2" : "bg-gray-600 rounded-md border-2 m-2 p-2"}
-                type="submit"
-                id="submit"
-                name="submitted"
-                disabled = {!isFormValid}
+          <input
+            className={
+              isFormValid
+                ? "bg-green rounded-md border-2 m-2 p-2"
+                : "bg-gray-600 rounded-md border-2 m-2 p-2"
+            }
+            type="submit"
+            id="submit"
+            name="submitted"
+            disabled={!isFormValid}
           />
-          {errors.submissionError && <div className="text-xs text-red-600">{errors.submissionError}</div>}
+          {errors.submissionError && (
+            <div className="text-xs text-red-600">{errors.submissionError}</div>
+          )}
         </form>
       ) : (
-        <div className="grid justify-center col-span-12">Registration successful, you can now <Link to="/login" className="underline text-blue">login</Link>.
-        Also don't forget to complete your profile.</div>
+        <div className="grid justify-center col-span-12">
+          Registration successful, you can now{" "}
+          <Link to="/login" className="underline text-blue">
+            login
+          </Link>
+          . Also don't forget to complete your profile.
+        </div>
       )}
     </div>
   );
