@@ -42,21 +42,17 @@ const Login = () => {
     const handleSubmit = (e) => {
         e.preventDefault() ;
 
-        const payload = {
-            email ,
-            password
-        }
-
         const API_BASE_URL = process.env.REACT_APP_API_BASE_URL
-        fetch(`${API_BASE_URL}/users/login` , {
-            method : "GET" ,
-            headers : {"Content-Type" : "application/json"},
-            payload : payload 
-        }).then(
+        const params = new URLSearchParams({ email: email, password: password});
+        fetch(`${API_BASE_URL}/users/login?${params}`).then(
             async (res)=>{
-                const errMsg = await res.text() ;
-
-                setErrors({...errors , ["submit"] : "Login Unsuccessful" } ) ;
+                if ( res.ok ) {
+                    setSubmitted(true)
+                } else {
+                    // const errMsg = await res.text() ;
+    
+                    setErrors({...errors , ["submit"] : "Login Unsuccessful" } ) ;
+                }
             }
         ).catch(
             (err) => {

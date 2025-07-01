@@ -2,9 +2,31 @@ const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
 const { User } = require("../models/user.model");
+const jwt = require("jsonwebtoken")
+const mongoose = require("mongoose");
+
+const generateAccessAndRefreshTokens = async (userId) =>{
+    try {
+        const user = await User.findById(userId)
+        const accessToken = user.generateAccessToken()
+        const refreshToken = user.generateRefreshToken()
+
+        user.refreshToken = refreshToken
+        await user.save({ validateBeforeSave: false })
+
+        return {accessToken, refreshToken}
+
+
+    } catch (error) {
+        throw new ApiError(500, "Something went wrong while generating refresh and access token")
+    }
+}
 
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+
+  console.log( email ) ;
+  console.log( password ) ;
 
   if (!email) {
     throw new ApiError(400, "username or email is required");
