@@ -8,8 +8,8 @@ const mongoose = require("mongoose");
 const generateAccessAndRefreshTokens = async (userId) =>{
     try {
         const user = await User.findById(userId)
-        const accessToken = user.generateAccessToken()
-        const refreshToken = user.generateRefreshToken()
+        const accessToken = user.generateAccessTokens()
+        const refreshToken = user.generateRefreshTokens()
 
         user.refreshToken = refreshToken
         await user.save({ validateBeforeSave: false })
@@ -18,6 +18,7 @@ const generateAccessAndRefreshTokens = async (userId) =>{
 
 
     } catch (error) {
+        console.log(error);
         throw new ApiError(500, "Something went wrong while generating refresh and access token")
     }
 }
@@ -25,14 +26,11 @@ const generateAccessAndRefreshTokens = async (userId) =>{
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  console.log( email ) ;
-  console.log( password ) ;
-
   if (!email) {
     throw new ApiError(400, "username or email is required");
   }
 
-  const user = await User.findOne(email);
+  const user = await User.findOne({email : email});
 
   if (!user) {
     throw new ApiError(404, "User does not exist");
@@ -85,7 +83,7 @@ const signup = asyncHandler(async (req, res) => {
     termsAgreed,
   } = req.body;
 
-  console.log(password);
+  // console.log(password);
 
   if (
     [firstName, lastName, password, email, phoneNumber].some(
@@ -108,7 +106,7 @@ const signup = asyncHandler(async (req, res) => {
   const user = await User.create({
     firstName,
     lastName,
-    password : password,
+    password,
     email,
     phoneNumber,
     DOB,

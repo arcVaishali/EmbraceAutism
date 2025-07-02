@@ -74,40 +74,15 @@ userSchema.virtual("age").get(function () {
 });
 
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) return next();
+    if(!this.isModified("password")) return next();
 
-  this.password = await bcrypt
-    .hash(this.password, 10)
-    .then(
-      () => {
-        console.log("BCRYPT: The Operation was successful");
-      },
-      (err) => {
-        console.error("BCRYPT: Encountered some error", err);
-      }
-    )
-    .catch(error => {
-      console.log("BCRYPT: Some error occurred while hashing the password");
-    });
-  next();
-});
+    this.password = await bcrypt.hash(this.password, 10)
+    next()
+})
 
-
-userSchema.methods.isPasswordCorrect = async function (inputPassword) {
-  return await bcrypt
-  .compare(inputPassword, this.password)
-  .then(
-    () => {
-      console.log("BCRYPT: Operation was successful");
-    },
-    (err) => {
-      console.error("BCRYPT: Some Error Occurred While password comparison", err);
-      }
-    )
-    .catch((err) => {
-      console.log("BCRYPT: Some error occurred while checking password");
-    });
-  };
+userSchema.methods.isPasswordCorrect = async function(password){
+    return await bcrypt.compare(password, this.password)
+}
   
   userSchema.methods.generateAccessTokens = function () {
     return jwt.sign(
