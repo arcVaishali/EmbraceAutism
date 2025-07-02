@@ -4,7 +4,7 @@ const ApiResponse = require("../utils/ApiResponse");
 const { User } = require("../models/user.model");
 const jwt = require("jsonwebtoken")
 
-export const verifyJWT = asyncHandler(async(req, _, next) => {
+const verifyJWT = asyncHandler(async(req, _, next) => {
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
         
@@ -29,3 +29,5 @@ export const verifyJWT = asyncHandler(async(req, _, next) => {
     }
     
 })
+
+module.exports = verifyJWT ;

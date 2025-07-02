@@ -128,4 +128,12 @@ const signup = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdUser, "User registered Successfully"));
 });
 
-module.exports = { login, signup };
+const updatePassword = asyncHandler( async (req , res ) => {
+
+}) ;
+
+const updateAccountDetails = asyncHandler( async (req , res ) => {
+
+}) ;
+
+module.exports = { login, signup , updatePassword , updateAccountDetails};

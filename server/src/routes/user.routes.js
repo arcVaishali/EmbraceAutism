@@ -1,15 +1,14 @@
 const Router = require("express") ;
 const userRouter = Router() ;
+const verifyJWT  = require("../middlewares/auth.middleware");
 
-const { login , signup } = require("../controllers/user.controller")
+const { login , signup , updatePassword , updateAccountDetails } = require("../controllers/user.controller");
 
 userRouter.route("/login").post( login );
 userRouter.route("/signup").post( signup ) ;
 
-userRouter.route("/updatePassword")
-userRouter.route("/updateAccountDetails")
-userRouter.route("/updateAvatar")
-userRouter.route("/updateCoverImage")
+userRouter.route("/updatePassword").post(verifyJWT , updatePassword );
+userRouter.route("/updateAccountDetails").post( verifyJWT , updateAccountDetails) ;
 
 userRouter.route("/myCommunityEvents")
 userRouter.route("/myStories") 
