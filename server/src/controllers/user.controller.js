@@ -11,6 +11,10 @@ const generateAccessAndRefreshTokens = async (userId) =>{
         const accessToken = user.generateAccessTokens()
         const refreshToken = user.generateRefreshTokens()
 
+        console.log( "ACCESS TOKEN ==> " , accessToken  ) ;
+        console.log("==================================") ;
+        console.log( "ACCESS TOKEN ==> " , refreshToken  ) ;
+
         user.refreshToken = refreshToken
         await user.save({ validateBeforeSave: false })
 
@@ -52,7 +56,9 @@ const login = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    secure: true,
+    secure: false,
+    sameSite: "lax",
+    maxAge: 24 * 60 * 60 * 1000
   };
 
   return res
@@ -136,4 +142,8 @@ const updateAccountDetails = asyncHandler( async (req , res ) => {
 
 }) ;
 
-module.exports = { login, signup , updatePassword , updateAccountDetails};
+const userData = asyncHandler( async ( req , res) => {
+
+})
+
+module.exports = { login, signup , updatePassword , updateAccountDetails , userData};

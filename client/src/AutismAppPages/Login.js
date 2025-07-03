@@ -50,10 +50,14 @@ const Login = () => {
       .then(async (res) => {
         if (res.ok) {
           setSubmitted(true);
+        //   Cannot be accessed due to cookie option httpOnly set to true for defense against cookie theft (XSS attack)
+        //   const cookie = await res.cookies() ;
+        //   console.log( "cookie ===> " , cookie.accessToken ) ;
+        //   console.log( "cookie ===> " , cookie.refreshToken ) ;
         } else {
           // const errMsg = await res.text() ;
 
-          setErrors({ ...errors, ["submit"]: "Login Unsuccessful" });
+          setErrors({ ...errors, submit: "Login Unsuccessful" });
         }
       })
       .catch((err) => {
