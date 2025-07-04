@@ -36,6 +36,10 @@ const userSchema = new Schema(
     address: {
       type: String,
     },
+    about : {
+      type : String,
+      default : "Hey! I am new @EmbraceAutism"
+    },
     userType: {
       type: String,
       enums: ["Adult", "Child"],
