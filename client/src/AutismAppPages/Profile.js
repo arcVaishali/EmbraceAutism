@@ -10,8 +10,8 @@ const Profile = () => {
   });
   const [errors, setErrors] = useState({});
   const [isEditing, setIsEditing] = useState(false);
-  const [firstName , setFirstName ] = useState("") ;
-  
+  const [isValid, setIsValid] = useState(false);
+  const [touched , setTouched] = useState({}) ;
 
   useEffect(() => {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -41,82 +41,103 @@ const Profile = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  useEffect(()=> {
-    const errors = {} ;
-    
-  } , [ isEditing ] ) 
+  useEffect(() => {
+    const errors = {};
+  }, [isEditing , touched ]);
   const handleEditToggle = () => {
     setIsEditing(true);
   };
-  const handleSubmit = (e)=> {
-    e.preventDefault() ;
-
-    const payload = {
-        username ,
-        avatar , 
-        coverImage ,
-        dob,
-        firstName ,
-        lastName ,
-        email
-    }
-    
-    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL ;
-    fetch(`${API_BASE_URL}/users/updateAccountDetails` , {
-        method : "PUT" ,
-        header : {"Content-Type" : "application/json"},
-        credentials : "include",
-        body : JSON.stringify(payload) 
-    }).then((res)=>{
-        if ( res.ok) {
-
-        } else {
-
-        }
-    }).catch((err)=> console.log( err ) ) 
+  const handleChange = (field) => {};
+  const handleBlur = (field) => {
+    setTouched({...touched , [field] : true})
   }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // const payload = {
+    //   username,
+    //   avatar,
+    //   coverImage,
+    //   dob,
+    //   firstName,
+    //   lastName,
+    //   about,
+    // };
+
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    fetch(`${API_BASE_URL}/users/updateAccountDetails`, {
+      method: "PUT",
+      header: { "Content-Type": "application/json" },
+      credentials: "include",
+      body: JSON.stringify({}),
+    })
+      .then((res) => {
+        if (res.ok) {
+        } else {
+        }
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <div className="grid grid-rows-2 justify-center p-10">
       <div
         className="grid grid-cols-12 col-span-12 justify-center p-10 bg-cover bg-center rounded-lg"
         style={{ backgroundImage: `url(${thisUser.coverImage})` }}
       >
-        {!isEditing ? (
-          <div className="grid grid-cols-12 col-span-12 h-full w-full bg-black bg-opacity-30 items-center justify-center p-10">
-            <div className="col-span-3">
-              <img src={thisUser.avatar} className="w-64 h-64 rounded-full" />
-            </div>
-            <div className="col-start-5 col-span-8 grid">
-              <span className="text-slate-50 text-6xl">
-                {thisUser.firstName}&nbsp;{thisUser.lastName}
+        <div className="grid grid-cols-12 col-span-12 h-full w-full bg-black bg-opacity-30 items-center justify-center p-10">
+          <div className="col-span-3">
+            {!isEditing ? (
+              <div className="col-span-3">
+                <img src={thisUser.avatar} className="w-64 h-64 rounded-full" />
                 <button
                   onClick={handleEditToggle}
                   className="ml-4 text-gray-300 hover:text-white"
                 >
                   <i className="fas fa-edit text-sm"></i>
                 </button>
-              </span>
-              <span className="text-slate-50">{thisUser.username}</span>
-              <span className="text-slate-50">
-                Happy Birthday on🎂{thisUser.dob}
-              </span>
-              <span className="text-slate-50 text-xs">
-                Account created on: {thisUser.accountCreatedOn}
-              </span>
-              <span className="text-slate-50 text-xs">{thisUser.about}</span>
-            </div>
+              </div>
+            ) : (
+              <form
+                className="grid grid-cols-6 col-span-12"
+                onSubmit={(e) => handleSubmit(e.target.value)}
+              >
+                <input
+                  className="col-span-4"
+                  id="avatar"
+                  name="avatar"
+                  value="avatar"
+                  onChange={(e) => handleChange(e.target.value)}
+                  onBlur={(e) => handleBlur("avatar")}
+                />
+                <input
+                  className="col-span-2 border-2 rounded-md"
+                  disabled={!isValid}
+                >
+                  Save
+                </input>
+              </form>
+            )}
           </div>
-        ) : (
-          <form onSubmit={(e)=>handleSubmit()} className="grid grid-cols-12 col-span-12 h-full w-full bg-black bg-opacity-30 items-center justify-center p-10">
-            <label for="firstName"></label>
-            <input
-            className=""
-            id="firstName" 
-            name="firstName" 
-            value={firstName}
-            />
-          </form>
-        )}
+          <div className="col-start-5 col-span-8 grid">
+            <span className="text-slate-50 text-6xl">
+              {thisUser.firstName}&nbsp;{thisUser.lastName}
+              <button
+                onClick={handleEditToggle}
+                className="ml-4 text-gray-300 hover:text-white"
+              >
+                <i className="fas fa-edit text-sm"></i>
+              </button>
+            </span>
+            <span className="text-slate-50">{thisUser.username}</span>
+            <span className="text-slate-50">
+              Happy Birthday on🎂{thisUser.dob}
+            </span>
+            <span className="text-slate-50 text-xs">
+              Account created on: {thisUser.accountCreatedOn}
+            </span>
+            <span className="text-slate-50 text-xs">{thisUser.about}</span>
+          </div>
+        </div>
       </div>
     </div>
   );
