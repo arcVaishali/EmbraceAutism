@@ -3,31 +3,30 @@ import { Link } from "react-router-dom";
 import Haze from "./Haze";
 
 const Navbar = () => {
-  const [user, setUser] = useState({});
+  const [thisUser, setThisUser] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-    fetch(`${API_BASE_URL}/users/userData` , {
-      method : "GET" ,
-      credentials : "include" 
+    fetch(`${API_BASE_URL}/users/userData`, {
+      method: "GET",
+      credentials: "include",
     })
       .then(async (res) => {
         if (res.ok) {
           const body = await res.json();
-          setUser({ username: body.username, avatar: body.avatar });
-          console.log("Success");
-          setIsAuthenticated(true) ;
+          setThisUser(body.data.user.username);
+          setIsAuthenticated(true);
         } else {
-          setErrors({ ...errors, isAuthenticated: false });
-          setIsAuthenticated(false) ;
+          setErrors({ ...errors, isAuthenticated: "Please login" });
+          setIsAuthenticated(false);
         }
       })
       .catch((err) => {
         console.log("Some Error Occurred fetching user details");
       });
-  } , []);
+  }, []);
   return (
     <header className="absolute inset-x-0 top-0 z-50">
       <Haze />
@@ -104,7 +103,7 @@ const Navbar = () => {
                 to="/profile"
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
-                user.username <span aria-hidden="true">&rarr;</span>
+                {thisUser} <span aria-hidden="true">&rarr;</span>
               </Link>
             </div>
           ) : (
@@ -114,6 +113,7 @@ const Navbar = () => {
                 className="text-sm font-semibold leading-6 text-gray-900"
               >
                 Signup <span aria-hidden="true">&rarr;</span>
+                <div className="text-xs text-red-600">{errors.isAuthenticated}</div>
               </Link>
             </button>
           )}
