@@ -16,6 +16,35 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
   const [errors, setErrors] = useState({});
 
+  useEffect(() => {
+    const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+    fetch(`${API_BASE_URL}/users/userData`, {
+      method: "GET",
+      credentials: "include",
+    })
+      .then(async (res) => {
+        if (res.ok) {
+          const body = await res.json();
+
+          setThisUser({
+            ...thisUser,
+            username: body.data.user.username,
+            dob: body.data.user.DOB.split("T")[0],
+            about: body.data.user.body,
+            // coverImage : body.data.user.coverImage ,
+            // avatar : body.data.user.avatar ,
+            email: body.data.user.email,
+            firstName: body.data.user.firstName,
+            lastName: body.data.user.lastName,
+            accountCreatedOn: body.data.user.createdAt.split("T")[0],
+          });
+        } else {
+          setErrors({ ...errors, userFetchError: "Please login" });
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleEditToggle = () => {
     setIsEditing(!isEditing); // Toggle edit mode
   };
