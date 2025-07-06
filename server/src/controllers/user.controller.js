@@ -2,26 +2,27 @@ const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
 const { User } = require("../models/user.model");
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
 
-const generateAccessAndRefreshTokens = async (userId) =>{
-    try {
-        const user = await User.findById(userId)
-        const accessToken = user.generateAccessTokens()
-        const refreshToken = user.generateRefreshTokens()
+const generateAccessAndRefreshTokens = async (userId) => {
+  try {
+    const user = await User.findById(userId);
+    const accessToken = user.generateAccessTokens();
+    const refreshToken = user.generateRefreshTokens();
 
-        user.refreshToken = refreshToken
-        await user.save({ validateBeforeSave: false })
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: false });
 
-        return {accessToken, refreshToken}
-
-
-    } catch (error) {
-        console.log(error);
-        throw new ApiError(500, "Something went wrong while generating refresh and access token")
-    }
-}
+    return { accessToken, refreshToken };
+  } catch (error) {
+    console.log(error);
+    throw new ApiError(
+      500,
+      "Something went wrong while generating refresh and access token"
+    );
+  }
+};
 
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
@@ -30,7 +31,7 @@ const login = asyncHandler(async (req, res) => {
     throw new ApiError(400, "username or email is required");
   }
 
-  const user = await User.findOne({email : email});
+  const user = await User.findOne({ email: email });
 
   if (!user) {
     throw new ApiError(404, "User does not exist");
@@ -54,7 +55,7 @@ const login = asyncHandler(async (req, res) => {
     httpOnly: true,
     secure: false,
     sameSite: "lax",
-    maxAge: 24 * 60 * 60 * 1000
+    maxAge: 24 * 60 * 60 * 1000,
   };
 
   return res
@@ -104,7 +105,7 @@ const signup = asyncHandler(async (req, res) => {
   }
 
   const [username] = email.split("@");
-  console.log( password ) ;
+  console.log(password);
   const user = await User.create({
     firstName,
     lastName,
@@ -116,7 +117,7 @@ const signup = asyncHandler(async (req, res) => {
     username,
   });
 
-//   console.log("I am here") ;
+  //   console.log("I am here") ;
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
   );
@@ -130,32 +131,43 @@ const signup = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdUser, "User registered Successfully"));
 });
 
-const updatePassword = asyncHandler( async (req , res ) => {
+const updatePassword = asyncHandler(async (req, res) => {});
 
-}) ;
+const updateAccountDetails = asyncHandler(async (req, res) => {
+  const loggedInUser = req.user;
+  const updatedUser = req.body;
 
-const updateAccountDetails = asyncHandler( async (req , res ) => {
-  const loggedInUser = req.user ;
-  const updatedUser = req.body ;
+  const updateMetaData = await User.updateOne(
+    { _id: loggedInUser._id },
+    {
+      firstName: updatedUser.firstName,
+      lastName: updatedUser.lastName,
+      DOB: updatedUser.dob,
+      about: updatedUser.about,
+    }
+  );
 
-  const updateMetaData = await User.updateOne({_id: loggedInUser._id} , {firstName : updatedUser.firstName , lastName : updatedUser.lastName , DOB : updatedUser.dob , about : updatedUser.about}) ;
+  return res.status(200).json(new ApiResponse(200, updateMetaData, "Done"));
+});
 
-  console.log(updateMetaData) ;
+const userData = asyncHandler(async (req, res) => {
+  const loggedInUser = req.user;
 
-  return res.status(200).json(new ApiResponse(200 , updateMetaData ,"Done" ))
-}) ;
+  return res.json(
+    new ApiResponse(
+      200,
+      {
+        user: loggedInUser,
+      },
+      "Fetched user data"
+    )
+  );
+});
 
-const userData = asyncHandler( async ( req , res) => {
-    
-   const loggedInUser = req.user ;
-
-   return res.json(
-    new ApiResponse(200 , {
-      user : loggedInUser ,
-    },
-    "Fetched user data"
-  )
-   )
-})
-
-module.exports = { login, signup , updatePassword , updateAccountDetails , userData};
+module.exports = {
+  login,
+  signup,
+  updatePassword,
+  updateAccountDetails,
+  userData,
+};
