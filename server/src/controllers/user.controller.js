@@ -131,7 +131,15 @@ const signup = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, createdUser, "User registered Successfully"));
 });
 
-const updatePassword = asyncHandler(async (req, res) => {});
+const updatePassword = asyncHandler(async (req, res) => {
+  const loggedInUser = req.user ;
+  const {currentPassword , newPassword} = req.body ;
+
+  // validation 
+  // delete refresh tokens and access token 
+  // update database
+
+});
 
 const updateAccountDetails = asyncHandler(async (req, res) => {
   const loggedInUser = req.user;
