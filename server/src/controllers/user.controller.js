@@ -4,6 +4,7 @@ const ApiResponse = require("../utils/ApiResponse");
 const { User } = require("../models/user.model");
 const jwt = require("jsonwebtoken");
 const mongoose = require("mongoose");
+const uploadOnCloudinary = require("../utils/cloudinary") ;
 
 const generateAccessAndRefreshTokens = async (userId) => {
   try {
@@ -155,77 +156,79 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
     }
   );
 
-  if ( loggedInUser.avatar !== updatedUser.avatar ) {
-    const avatarLocalPath = req.file?.path
-
-    if (!avatarLocalPath) {
-        throw new ApiError(400, "Avatar file is missing")
-    }
-
-    // TODO: delete old image 
-
-    const avatar = await uploadOnCloudinary(avatarLocalPath)
-
-    if (!avatar.url) {
-        throw new ApiError(400, "Error while uploading on avatar")
-        
-    }
-
-    // const updatedAvatar = await User.updateOne( { _id : loggedInUser._id } , {})
-
-    const user = await User.findByIdAndUpdate(
-        req.user?._id,
-        {
-            $set:{
-                avatar: avatar.url
-            }
-        },
-        {new: true}
-    ).select("-password")
-
-    return res
-    .status(200)
-    .json(
-        new ApiResponse(200, user, "Avatar image updated successfully")
-    )
-  }
-
-  if ( loggedInUser.coverImage !== updatedUser.coverImage ) {
-    const avatarLocalPath = req.file?.path
-
-    if (!avatarLocalPath) {
-        throw new ApiError(400, "Avatar file is missing")
-    }
-
-    // TODO: delete old image 
-
-    const avatar = await uploadOnCloudinary(avatarLocalPath)
-
-    if (!avatar.url) {
-        throw new ApiError(400, "Error while uploading on avatar")
-        
-    }
-
-    // const updatedAvatar = await User.updateOne( { _id : loggedInUser._id } , {})
-
-    const user = await User.findByIdAndUpdate(
-        req.user?._id,
-        {
-            $set:{
-                avatar: avatar.url
-            }
-        },
-        {new: true}
-    ).select("-password")
-
-    return res
-    .status(200)
-    .json(
-        new ApiResponse(200, user, "Avatar image updated successfully")
-    )
-  }
   return res.status(200).json(new ApiResponse(200, updateMetaData, "Done"));
 });
+
+const updateAvatar = asyncHandler( async ( req , res ) => {
+  const avatarLocalPath = req.file?.path
+
+  console.log("Avatar Upload begins") ;
+
+    if (!avatarLocalPath) {
+        throw new ApiError(400, "Avatar file is missing")
+    }
+
+    // TODO: delete old image 
+
+    const avatar = await uploadOnCloudinary(avatarLocalPath)
+
+    if (!avatar.url) {
+        throw new ApiError(400, "Error while uploading on avatar")
+        
+    }
+
+    // const updatedAvatar = await User.updateOne( { _id : loggedInUser._id } , {})
+
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set:{
+                avatar: avatar.url
+            }
+        },
+        {new: true}
+    ).select("-password")
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, user, "Avatar image updated successfully")
+    )
+})
+
+const updateCoverImage = asyncHandler( async ( req , res ) => {
+   const coverImageLocalPath = req.file?.path
+
+    if (!coverImageLocalPath) {
+        throw new ApiError(400, "Cover image file is missing")
+    }
+
+    //TODO: delete old image - assignment
+
+
+    const coverImage = await uploadOnCloudinary(coverImageLocalPath)
+
+    if (!coverImage.url) {
+        throw new ApiError(400, "Error while uploading on avatar")
+        
+    }
+
+    const user = await User.findByIdAndUpdate(
+        req.user?._id,
+        {
+            $set:{
+                coverImage: coverImage.url
+            }
+        },
+        {new: true}
+    ).select("-password")
+
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200, user, "Cover image updated successfully")
+    )
+})
 
 const userData = asyncHandler(async (req, res) => {
   const loggedInUser = req.user;
@@ -247,4 +250,6 @@ module.exports = {
   updatePassword,
   updateAccountDetails,
   userData,
+  updateAvatar , 
+  updateCoverImage,
 };

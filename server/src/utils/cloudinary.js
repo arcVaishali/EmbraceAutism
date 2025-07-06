@@ -1,5 +1,5 @@
 
-const {cloudinary} = require("node_modules/cloudinary/lib/v2")
+const cloudinary = require("cloudinary").v2
 const fs = require("fs");
 
 cloudinary.config({ 
@@ -26,4 +26,4 @@ const uploadOnCloudinary = async (localFilePath) => {
     }
 }
 
-module.exports = {uploadOnCloudinary}
+module.exports = uploadOnCloudinary
