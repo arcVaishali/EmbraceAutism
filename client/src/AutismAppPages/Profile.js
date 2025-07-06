@@ -13,7 +13,7 @@ const Profile = () => {
     accountCreatedOn: "2025-07-04",
     about: "Lorem ipsum dolor sit amet.",
   });
-  const [isEditing, setIsEditing] = useState(false); // State to toggle edit mode
+  const [isEditing, setIsEditing] = useState(false);
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Profile = () => {
             ...thisUser,
             username: body.data.user.username,
             dob: body.data.user.DOB.split("T")[0],
-            about: body.data.user.body,
+            about: body.data.user.about,
             // coverImage : body.data.user.coverImage ,
             // avatar : body.data.user.avatar ,
             email: body.data.user.email,
@@ -46,17 +46,20 @@ const Profile = () => {
   }, []);
 
   const handleEditToggle = () => {
-    setIsEditing(!isEditing); // Toggle edit mode
+    setIsEditing(!isEditing); 
   };
 
   const handleUpdate = (field, value) => {
-    setThisUser({ ...thisUser, [field]: value }); // Update local state
-    // Make an API call to update the field on the server
+    setThisUser({ ...thisUser, [field]: value });
+  };
+
+  const handleSubmit = () => {
+    setIsEditing(!isEditing) ;
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
     fetch(`${API_BASE_URL}/users/updateAccountDetails`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ [field]: value }),
+      body: JSON.stringify(thisUser),
       credentials: "include",
     })
       .then((res) => {
@@ -66,7 +69,7 @@ const Profile = () => {
         console.log("User details updated successfully");
       })
       .catch((err) => console.error(err));
-  };
+  }
 
   return (
     <div className="grid grid-rows-2 justify-center p-10">
@@ -75,17 +78,18 @@ const Profile = () => {
         style={{ backgroundImage: `url(${thisUser.coverImage})` }}
       >
         <div className="grid grid-cols-12 col-span-12 h-full w-full bg-black bg-opacity-30 items-center justify-center p-10">
-          <div className="col-span-3">
+          <div className="col-span-3 grid justify-center">
             <img src={thisUser.avatar} className="w-64 h-64 rounded-full" />
+            <div className="text-xs italic opacity-40 underline text-white text-center m-2 hover:text-gray-200">{thisUser.username}</div>
           </div>
           <div className="col-start-5 col-span-8 grid">
-            <span className="text-slate-50 text-6xl flex items-center">
+            <span className="text-slate-50 text-6xl flex items-center m-2">
               {isEditing ? (
                 <input
                   type="text"
                   value={thisUser.firstName}
                   onChange={(e) => handleUpdate("firstName", e.target.value)}
-                  className="bg-gray-800 text-white rounded p-2"
+                  className="bg-gray-800 text-white rounded p-2 text-base"
                 />
               ) : (
                 thisUser.firstName
@@ -96,43 +100,46 @@ const Profile = () => {
                   type="text"
                   value={thisUser.lastName}
                   onChange={(e) => handleUpdate("lastName", e.target.value)}
-                  className="bg-gray-800 text-white rounded p-2"
+                  className="bg-gray-800 text-white rounded p-2 text-base"
                 />
               ) : (
                 thisUser.lastName
               )}
               <button
-                onClick={handleEditToggle}
-                className="ml-4 text-gray-300 hover:text-white"
+                onClick={isEditing ? handleSubmit : handleEditToggle}
+                className="ml-4 text-gray-300 hover:text-white text-base"
               >
-                <i className="fas fa-edit"></i> {/* Font Awesome Edit Icon */}
+                <i className="fas fa-edit text-xs">
+                  {!isEditing ? <span>Edit</span> : <span>Save</span>}
+                </i>
               </button>
             </span>
-            <span className="text-slate-50">
+            <span className="text-slate-50 m-2">
               {isEditing ? (
                 <input
                   type="date"
                   value={thisUser.dob}
                   onChange={(e) => handleUpdate("dob", e.target.value)}
-                  className="bg-gray-800 text-white rounded p-2"
+                  className="bg-gray-800 text-white rounded p-2 text-base"
                 />
               ) : (
                 `Happy Birthday on🎂 ${thisUser.dob}`
               )}
             </span>
-            <span className="text-slate-50 text-xs">
-              Account created on: {thisUser.accountCreatedOn}
-            </span>
-            <span className="text-slate-50 text-xs">
+            <span className="grid text-slate-50 text-xs m-2">
+              <div className="row-span-1 text-base">About</div>
               {isEditing ? (
                 <textarea
                   value={thisUser.about}
                   onChange={(e) => handleUpdate("about", e.target.value)}
-                  className="bg-gray-800 text-white rounded p-2"
+                  className="bg-gray-800 text-white rounded p-2 text-base"
                 />
               ) : (
                 thisUser.about
               )}
+            </span>
+            <span className="text-slate-50 text-xs m-2">
+              Account created on: {thisUser.accountCreatedOn}
             </span>
           </div>
         </div>

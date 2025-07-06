@@ -9,7 +9,7 @@ userRouter.route("/signup").post( signup ) ;
 
 userRouter.route("/userData").get( verifyJWT , userData ) ;
 userRouter.route("/updatePassword").post(verifyJWT , updatePassword );
-userRouter.route("/updateAccountDetails").post( verifyJWT , updateAccountDetails) ;
+userRouter.route("/updateAccountDetails").patch( verifyJWT , updateAccountDetails) ;
 
 userRouter.route("/myCommunityEvents")
 userRouter.route("/myStories") 

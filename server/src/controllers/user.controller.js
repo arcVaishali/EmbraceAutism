@@ -135,7 +135,14 @@ const updatePassword = asyncHandler( async (req , res ) => {
 }) ;
 
 const updateAccountDetails = asyncHandler( async (req , res ) => {
+  const loggedInUser = req.user ;
+  const updatedUser = req.body ;
 
+  const updateMetaData = await User.updateOne({_id: loggedInUser._id} , {firstName : updatedUser.firstName , lastName : updatedUser.lastName , DOB : updatedUser.dob , about : updatedUser.about}) ;
+
+  console.log(updateMetaData) ;
+
+  return res.status(200).json(new ApiResponse(200 , updateMetaData ,"Done" ))
 }) ;
 
 const userData = asyncHandler( async ( req , res) => {
