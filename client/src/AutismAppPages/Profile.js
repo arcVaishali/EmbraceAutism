@@ -3,9 +3,9 @@ import React, { useState, useEffect } from "react";
 const Profile = () => {
   const [thisUser, setThisUser] = useState({
     avatar:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://res.cloudinary.com/dvny8jtdq/image/upload/v1718593872/samples/bike.jpg",
     coverImage:
-      "https://images.unsplash.com/photo-1750517896388-672eb820110c?q=80&w=387&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://res.cloudinary.com/dvny8jtdq/image/upload/v1718593902/cld-sample-2.jpg",
     username: "JohnDoe",
     dob: "1990-01-01",
     firstName: "John",
