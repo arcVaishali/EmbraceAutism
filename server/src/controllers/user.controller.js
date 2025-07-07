@@ -145,51 +145,37 @@ const updateAccountDetails = asyncHandler(async (req, res) => {
   const loggedInUser = req.user;
   const updatedUser = req.body;
 
-  if ( updatedUser.firstName.trim() === '' || updatedUser.lastName.trim() === '' || updatedUser.dob.trim() === '' || updatedUser.about.trim() === '' ) {
-    throw new ApiError( "One of the fields is empty" ) ;
+  if (
+    updatedUser.firstName.trim() === "" ||
+    updatedUser.lastName.trim() === "" ||
+    updatedUser.dob.trim() === "" ||
+    updatedUser.about.trim() === ""
+  ) {
+    throw new ApiError("One of the fields is empty");
   }
 
-  if (loggedInUser.firstName !== updatedUser.firstName) {
-    const updateMetaData = await User.updateOne(
+  const updateFields = {};
+  if (loggedInUser.firstName !== updatedUser.firstName)
+    updateFields.firstName = updatedUser.firstName;
+  if (loggedInUser.lastName !== updatedUser.lastName)
+    updateFields.lastName = updatedUser.lastName;
+  if (loggedInUser.DOB !== updatedUser.dob) updateFields.DOB = updatedUser.dob;
+  if (loggedInUser.about !== updatedUser.about)
+    updateFields.about = updatedUser.about;
+
+  if (Object.keys(updateFields).length > 0) {
+    const updatedUserDoc = await User.updateOne(
       { _id: loggedInUser._id },
-      {
-        firstName: updatedUser.firstName,
-      }
+      { $set: updateFields }
     );
-    return res.status(200).json(new ApiResponse(200, updateMetaData, "Done"));
+    return res
+      .status(200)
+      .json(new ApiResponse(200, updatedUserDoc, "Updated"));
+  } else {
+    return res
+      .status(200)
+      .json(new ApiResponse(200, null, "No changes detected"));
   }
-
-  if (loggedInUser.lastName !== updatedUser.lastName) {
-    const updateMetaData = await User.updateOne(
-      { _id: loggedInUser._id },
-      {
-        lastName: updatedUser.lastName,
-      }
-    );
-    return res.status(200).json(new ApiResponse(200, updateMetaData, "Done"));
-  }
-
-  if (loggedInUser.dob !== updatedUser.dob) {
-    const updateMetaData = await User.updateOne(
-      { _id: loggedInUser._id },
-      {
-        DOB: updatedUser.dob,
-      }
-    );
-    return res.status(200).json(new ApiResponse(200, updateMetaData, "Done"));
-  }
-
-  if (loggedInUser.about !== updatedUser.about) {
-    const updateMetaData = await User.updateOne(
-      { _id: loggedInUser._id },
-      {
-        about: updatedUser.about,
-      }
-    );
-    return res.status(200).json(new ApiResponse(200, updateMetaData, "Done"));
-  }
-
-  return res.status(200).json(new ApiResponse(200, "No update required"));
 });
 
 const updateAvatar = asyncHandler(async (req, res) => {
