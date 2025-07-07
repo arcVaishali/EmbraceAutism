@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ButtonPrimary from "../AutismAppComponents/ButtonPrimary";
 
 const Profile = () => {
   const [thisUser, setThisUser] = useState({});
@@ -8,6 +9,7 @@ const Profile = () => {
   const [coverImage, setCoverImage] = useState(null);
   const [touch, setTouch] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -57,7 +59,8 @@ const Profile = () => {
 
     // Validation
     const isDOBValid = thisUser.dob !== "";
-    const areNamesValid = thisUser.firstName?.trim() !== "" && thisUser.lastName?.trim() !== "";
+    const areNamesValid =
+      thisUser.firstName?.trim() !== "" && thisUser.lastName?.trim() !== "";
 
     setIsFormValid(areNamesValid && isDOBValid);
   }, [
@@ -154,8 +157,83 @@ const Profile = () => {
         }
       });
     }
-    
-    window.location.reload() ;
+
+    window.location.reload();
+  };
+
+  const PasswordChangeModal = ({ show, onClose }) => {
+    const [email, setEmail] = useState("");
+    const [oldPassword, setOldPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+
+    const handleSubmit = async () => {
+      if (newPassword !== confirmPassword)
+        return alert("Passwords don't match!");
+
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/users/updatePassword`,
+        {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({ email , oldPassword, newPassword }),
+        }
+      );
+
+      const data = await res.json();
+      if (res.ok) {
+        alert("Password changed!");
+        onClose(); 
+      } else {
+        alert(data.message || "Error");
+      }
+    };
+
+    if (!show) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+        <div className="bg-white p-6 rounded shadow-md w-96">
+          <h2 className="text-lg font-bold mb-4">Change Password</h2>
+          <input
+            placeholder="Email"
+            type="email"
+            onChange={(e) => setEmail(e.target.value)}
+            className="border p-2 mb-2 w-full"
+          />
+          <input
+            placeholder="Old Password"
+            type="password"
+            onChange={(e) => setOldPassword(e.target.value)}
+            className="border p-2 mb-2 w-full"
+          />
+          <input
+            placeholder="New Password"
+            type="password"
+            onChange={(e) => setNewPassword(e.target.value)}
+            className="border p-2 mb-2 w-full"
+          />
+          <input
+            placeholder="Confirm Password"
+            type="password"
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            className="border p-2 mb-2 w-full"
+          />
+          <div className="flex justify-end space-x-2">
+            <button onClick={onClose} className="text-gray-600 px-3 py-1">
+              Cancel
+            </button>
+            <button
+              onClick={handleSubmit}
+              className="bg-blue-600 text-white px-3 py-1 rounded"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -274,6 +352,20 @@ const Profile = () => {
             <span className="text-slate-50 text-xs m-2">
               Account created on: {thisUser.accountCreatedOn}
             </span>
+            <div>
+              <button
+                className="m-4 p-2 col-span-4 bg-white border-2 rounded-full hover:bg-transparent hover:text-white"
+                onClick={(e) => setShowModal(true)}
+              >
+                Update Password
+              </button>
+              {showModal && (
+                <PasswordChangeModal
+                  show={showModal}
+                  onClose={(e) => setShowModal(false)}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
