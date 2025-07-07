@@ -40,10 +40,10 @@ const Profile = () => {
 
   useEffect(() => {
     const error = {};
-    if (touch.firstName && thisUser.firstName.trim() === "") {
+    if (touch.firstName && thisUser.firstName?.trim() === "") {
       error.firstName = "First Name cannot be empty";
     }
-    if (touch.lastName && thisUser.lastName.trim() === "") {
+    if (touch.lastName && thisUser.lastName?.trim() === "") {
       error.lastName = "Last Name cannot be empty";
     }
     if (touch.DOB && !thisUser.dob) {
@@ -57,7 +57,7 @@ const Profile = () => {
 
     // Validation
     const isDOBValid = thisUser.dob !== "";
-    const areNamesValid = thisUser.firstName.trim() !== "" && thisUser.lastName.trim() !== "";
+    const areNamesValid = thisUser.firstName?.trim() !== "" && thisUser.lastName?.trim() !== "";
 
     setIsFormValid(areNamesValid && isDOBValid);
   }, [
@@ -154,8 +154,8 @@ const Profile = () => {
         }
       });
     }
-
-    setIsEditing(!isEditing);
+    
+    window.location.reload() ;
   };
 
   return (
