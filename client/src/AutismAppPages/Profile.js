@@ -56,8 +56,8 @@ const Profile = () => {
     setErrors(error);
 
     // Validation
-    const isDOBValid = DOB !== "";
-    const areNamesValid = firstName.trim() !== "" && lastName.trim() !== "";
+    const isDOBValid = thisUser.dob !== "";
+    const areNamesValid = thisUser.firstName.trim() !== "" && thisUser.lastName.trim() !== "";
 
     setIsFormValid(areNamesValid && isDOBValid);
   }, [
