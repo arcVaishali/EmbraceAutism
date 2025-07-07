@@ -96,11 +96,6 @@ const Profile = () => {
     )
       return;
 
-    const fieldsToUpdate = ["firstName", "lastName", "dob", "about"];
-    const shouldUpdate = fieldsToUpdate.some((field) => touch[field]);
-
-    if (!shouldUpdate) return;
-
     fetch(`${API_BASE_URL}/users/updateAccountDetails`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
