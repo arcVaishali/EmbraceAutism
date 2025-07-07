@@ -6,7 +6,8 @@ const Profile = () => {
   const [errors, setErrors] = useState({});
   const [avatar, setAvatar] = useState(null);
   const [coverImage, setCoverImage] = useState(null);
-  const [touch , setTouch] = useState({});
+  const [touch, setTouch] = useState({});
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
@@ -18,8 +19,8 @@ const Profile = () => {
         if (res.ok) {
           const body = await res.json();
 
-          setThisUser({
-            ...thisUser,
+          setThisUser((prev) => ({
+            ...prev,
             username: body.data.user.username,
             dob: body.data.user.DOB.split("T")[0],
             about: body.data.user.about,
@@ -27,7 +28,7 @@ const Profile = () => {
             firstName: body.data.user.firstName,
             lastName: body.data.user.lastName,
             accountCreatedOn: body.data.user.createdAt.split("T")[0],
-          });
+          }));
           setAvatar(body.data.user.avatar);
           setCoverImage(body.data.user.coverImage);
         } else {
@@ -37,6 +38,39 @@ const Profile = () => {
       .catch((err) => console.log(err));
   }, []);
 
+  useEffect(() => {
+    const error = {};
+    if (touch.firstName && thisUser.firstName.trim() === "") {
+      error.firstName = "First Name cannot be empty";
+    }
+    if (touch.lastName && thisUser.lastName.trim() === "") {
+      error.lastName = "Last Name cannot be empty";
+    }
+    if (touch.DOB && !thisUser.dob) {
+      error.DOB = "Date of Birth is required";
+    }
+    if (touch.about && !thisUser.about) {
+      error.about = "Please Tell a little bit about yourself";
+    }
+
+    setErrors(error);
+
+    // Validation
+    const isDOBValid = DOB !== "";
+    const areNamesValid = firstName.trim() !== "" && lastName.trim() !== "";
+
+    setIsFormValid(areNamesValid && isDOBValid);
+  }, [
+    thisUser.firstName,
+    thisUser.lastName,
+    thisUser.dob,
+    thisUser.about,
+    touch.about,
+    touch.firstName,
+    touch.lastName,
+    touch.dob,
+  ]);
+
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
   };
@@ -45,11 +79,28 @@ const Profile = () => {
     setThisUser({ ...thisUser, [field]: value });
   };
 
-  const handleTouch = () => {};
+  const handleTouch = (field) => {
+    setTouch({ ...touch, [field]: true });
+  };
 
   const handleSubmit = () => {
-    setIsEditing(!isEditing);
     const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
+    if (
+      !touch.firstName &&
+      !touch.lastName &&
+      !touch.dob &&
+      !touch.about &&
+      !touch.avatar &&
+      !touch.coverImage
+    )
+      return;
+
+    const fieldsToUpdate = ["firstName", "lastName", "dob", "about"];
+    const shouldUpdate = fieldsToUpdate.some((field) => touch[field]);
+
+    if (!shouldUpdate) return;
+
     fetch(`${API_BASE_URL}/users/updateAccountDetails`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -58,14 +109,17 @@ const Profile = () => {
     })
       .then((res) => {
         if (!res.ok) {
+          setErrors({
+            ...errors,
+            userDetailsError: "Failed to update user details",
+          });
           throw new Error("Failed to update user details");
         }
         console.log("User details updated successfully");
       })
       .catch((err) => console.error(err));
 
-
-    if (avatar !== null) {
+    if (avatar !== null && touch.avatar) {
       const formData = new FormData();
       formData.append("image", avatar);
 
@@ -77,13 +131,14 @@ const Profile = () => {
         const JsonObj = await res.json();
         if (!res.ok) {
           setErrors({ ...errors, AvatarUploadError: "Avatar upload Failed" });
+          throw new Error("Avatar upload failed");
         } else {
           console.log("Success ::", JsonObj);
         }
       });
     }
 
-    if (coverImage !== null) {
+    if (coverImage !== null && touch.coverImage) {
       const formData = new FormData();
       formData.append("image", coverImage);
 
@@ -98,11 +153,14 @@ const Profile = () => {
             ...errors,
             CoverImageUploadError: "Cover Image upload Failed",
           });
+          throw new Error("Cover Image upload failed");
         } else {
           console.log("Success ::", JsonObj);
         }
       });
     }
+
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -138,6 +196,7 @@ const Profile = () => {
                     accept="image/*"
                     name="avatar"
                     onChange={(e) => setAvatar(e.target.files[0])}
+                    onBlur={(e) => handleTouch("avatar")}
                   />
                 </div>
                 <div className="flex-row items-center justify-center m-2 ">
@@ -148,6 +207,7 @@ const Profile = () => {
                     accept="image/*"
                     name="coverImage"
                     onChange={(e) => setCoverImage(e.target.files[0])}
+                    onBlur={(e) => handleTouch("coverImage")}
                   />
                 </div>
               </div>
@@ -164,6 +224,7 @@ const Profile = () => {
                   value={thisUser.firstName}
                   onChange={(e) => handleUpdate("firstName", e.target.value)}
                   className="bg-gray-800 text-white rounded p-2 text-base"
+                  onBlur={(e) => handleTouch("firstName")}
                 />
               ) : (
                 thisUser.firstName
@@ -175,6 +236,7 @@ const Profile = () => {
                   value={thisUser.lastName}
                   onChange={(e) => handleUpdate("lastName", e.target.value)}
                   className="bg-gray-800 text-white rounded p-2 text-base"
+                  onBlur={(e) => handleTouch("lastName")}
                 />
               ) : (
                 thisUser.lastName
@@ -195,6 +257,7 @@ const Profile = () => {
                   value={thisUser.dob}
                   onChange={(e) => handleUpdate("dob", e.target.value)}
                   className="bg-gray-800 text-white rounded p-2 text-base"
+                  onBlur={(e) => handleTouch("dob")}
                 />
               ) : (
                 `Happy Birthday on🎂 ${thisUser.dob}`
@@ -207,6 +270,7 @@ const Profile = () => {
                   value={thisUser.about}
                   onChange={(e) => handleUpdate("about", e.target.value)}
                   className="bg-gray-800 text-white rounded p-2 text-base"
+                  onBlur={(e) => handleTouch("about")}
                 />
               ) : (
                 thisUser.about
