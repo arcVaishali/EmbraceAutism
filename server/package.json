@@ -6,11 +6,15 @@
   "type": "commonjs",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start" : "nodemon src/index.js"
+    "start": "node dist/index.js",
+    "build": "babel src --out-dir dist --copy-files"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/cli": "^7.28.0",
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
     "nodemon": "^3.1.9",
     "prettier": "^3.6.2"
   },
