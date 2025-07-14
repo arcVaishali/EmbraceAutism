@@ -134,11 +134,46 @@ const signup = asyncHandler(async (req, res) => {
 
 const updatePassword = asyncHandler(async (req, res) => {
   const loggedInUser = req.user;
-  const { currentPassword, newPassword } = req.body;
+  const { oldPassword, newPassword } = req.body;
 
   // validation
-  // delete refresh tokens and access token
+  if (
+    oldPassword?.trim() === "" ||
+    newPassword?.trim() === ""
+  ) {
+    throw new ApiError("One of the fields is empty");
+  }
+
+  if (newPassword?.trim().length < 8) {
+    throw new ApiError("Password must be 8 characters");
+  }
+
+  const user = await User.findOne({ email: loggedInUser.email });
+  const isPasswordValid = await user.isPasswordCorrect(oldPassword);
+  if (!isPasswordValid) {
+    throw new ApiError("Invalid current password");
+  }
+
+  const options = {
+    httpOnly: true,
+    secure: false,
+    sameSite: "lax",
+    maxAge: 24 * 60 * 60 * 1000,
+  };
+
   // update database
+  user.password = newPassword;
+  user.refreshToken = null;
+  await user.save();
+
+  // delete refresh tokens and access token
+  res
+  .clearCookie("accessToken", options)
+  .clearCookie("refreshToken" , options);
+
+  return res
+    .status(200)
+    .json(new ApiResponse(200, "Password update successful, please login again"));
 });
 
 const updateAccountDetails = asyncHandler(async (req, res) => {

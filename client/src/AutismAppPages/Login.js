@@ -129,7 +129,7 @@ const Login = () => {
       ) : (
         <div className="grid justify-center col-span-12">
           User Login Successful, Pls complete your profile{" "}
-          <Link to="/user" className="underline text-blue">
+          <Link to="/profile" className="underline text-blue">
             here
           </Link>
         </div>

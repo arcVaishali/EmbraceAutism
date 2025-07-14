@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ButtonPrimary from "../AutismAppComponents/ButtonPrimary";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
   const [thisUser, setThisUser] = useState({});
@@ -162,10 +163,14 @@ const Profile = () => {
   };
 
   const PasswordChangeModal = ({ show, onClose }) => {
-    const [email, setEmail] = useState("");
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [showOldPassword, setShowOldPassword] = useState(false);
+    const [showNewPassword, setShowNewPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async () => {
       if (newPassword !== confirmPassword)
@@ -177,14 +182,15 @@ const Profile = () => {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
-          body: JSON.stringify({ email , oldPassword, newPassword }),
+          body: JSON.stringify({ oldPassword, newPassword }),
         }
       );
 
       const data = await res.json();
       if (res.ok) {
-        alert("Password changed!");
-        onClose(); 
+        alert("Password changed! Please login");
+        onClose();
+        navigate("/login");
       } else {
         alert(data.message || "Error");
       }
@@ -196,37 +202,63 @@ const Profile = () => {
       <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
         <div className="bg-white p-6 rounded shadow-md w-96">
           <h2 className="text-lg font-bold mb-4">Change Password</h2>
-          <input
-            placeholder="Email"
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            className="border p-2 mb-2 w-full"
-          />
-          <input
-            placeholder="Old Password"
-            type="password"
-            onChange={(e) => setOldPassword(e.target.value)}
-            className="border p-2 mb-2 w-full"
-          />
-          <input
-            placeholder="New Password"
-            type="password"
-            onChange={(e) => setNewPassword(e.target.value)}
-            className="border p-2 mb-2 w-full"
-          />
-          <input
-            placeholder="Confirm Password"
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            className="border p-2 mb-2 w-full"
-          />
+          <div className="relative">
+            <input
+              placeholder="Old Password"
+              type={showOldPassword ? "text" : "password"}
+              onChange={(e) => setOldPassword(e.target.value)}
+              className="border p-2 mb-2 w-full"
+            />
+            <span
+              className="absolute right-3 top-3 cursor-pointer text-gray-500"
+              onClick={() => setShowOldPassword((prev) => !prev)}
+            >
+              <i
+                className={`fas ${showOldPassword ? "fa-eye-slash" : "fa-eye"}`}
+              ></i>
+            </span>
+          </div>
+          <div className="relative">
+            <input
+              placeholder="New Password"
+              type={showNewPassword ? "text" : "password"}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="border p-2 mb-2 w-full"
+            />
+            <span
+              className="absolute right-3 top-3 cursor-pointer text-gray-500"
+              onClick={() => setShowNewPassword((prev) => !prev)}
+            >
+              <i
+                className={`fas ${showNewPassword ? "fa-eye-slash" : "fa-eye"}`}
+              ></i>
+            </span>
+          </div>
+          <div className="relative">
+            <input
+              placeholder="Confirm Password"
+              type={showConfirmPassword ? "text" : "password"}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="border p-2 mb-2 w-full"
+            />
+            <span
+              className="absolute right-3 top-3 cursor-pointer text-gray-500"
+              onClick={() => setShowConfirmPassword((prev) => !prev)}
+            >
+              <i
+                className={`fas ${
+                  showConfirmPassword ? "fa-eye-slash" : "fa-eye"
+                }`}
+              ></i>
+            </span>
+          </div>
           <div className="flex justify-end space-x-2">
             <button onClick={onClose} className="text-gray-600 px-3 py-1">
               Cancel
             </button>
             <button
               onClick={handleSubmit}
-              className="bg-blue-600 text-white px-3 py-1 rounded"
+              className="bg-blue-600 text-black px-3 py-1 rounded"
             >
               Submit
             </button>
@@ -318,10 +350,20 @@ const Profile = () => {
                 onClick={isEditing ? handleSubmit : handleEditToggle}
                 className=" bg-white border-2 rounded-md p-2 ml-4 text-black hover:text-gray-800 text-base"
               >
-                <i className="fas fa-edit text-xs">
-                  {!isEditing ? <span>Edit</span> : <span>Save</span>}
-                </i>
+                {!isEditing ? (
+                  <i className="fas fa-edit"> Edit </i>
+                ) : (
+                  <span>Save</span>
+                )}
               </button>
+              {isEditing && (
+                <button
+                  onClick={handleEditToggle}
+                  className=" bg-white border-2 rounded-md p-2 ml-4 text-black hover:text-gray-800 text-base"
+                >
+                  Cancel
+                </button>
+              )}
             </span>
             <span className="text-slate-50 m-2">
               {isEditing ? (
