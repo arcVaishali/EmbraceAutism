@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Confetti from 'react-confetti'; 
-import ball from '../../assets/cartoon characters/objects/ball.png';
-import car from '../../assets/cartoon characters/objects/car.png';
-import book from '../../assets/cartoon characters/objects/book.png';
+import ball from '../assets/cartoon characters/objects/ball.png';
+import car from '../assets/cartoon characters/objects/car.png';
+import book from '../assets/cartoon characters/objects/book.png';
 import { Link } from 'react-router-dom';
-import ButtonPrimary from '../../AutismAppComponents/ButtonPrimary';
+import ButtonPrimary from '../AutismAppComponents/ButtonPrimary';
 
 
 const Games = () => {

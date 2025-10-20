@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { GiPuzzle } from 'react-icons/gi';
 import { FiPlayCircle } from 'react-icons/fi';
 import { ImFilm } from 'react-icons/im';
-import Navbar from '../../AutismAppComponents/Navbar';
-import ButtonSecondary from '../../AutismAppComponents/ButtonSecondary';
-import ButtonPrimary from '../../AutismAppComponents/ButtonPrimary';
+import Navbar from '../AutismAppComponents/Navbar';
+import ButtonSecondary from '../AutismAppComponents/ButtonSecondary';
+import ButtonPrimary from '../AutismAppComponents/ButtonPrimary';
 import { FaChild } from 'react-icons/fa';
 
 const ChildHome = () => {

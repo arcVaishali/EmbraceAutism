@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Confetti from 'react-confetti';
-import ButtonPrimary from '../../AutismAppComponents/ButtonPrimary';
+import ButtonPrimary from '../AutismAppComponents/ButtonPrimary';
 
 const Videos = () => {
 

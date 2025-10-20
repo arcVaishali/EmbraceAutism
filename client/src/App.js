@@ -4,22 +4,24 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Landing from "./AutismAppPages/AustismAppLanding";
 import AdultHome from "./AutismAppPages/AdultHome";
 import Footer from './AutismAppComponents/Footer';
-import ChildHome from './AutismAppPages/Child/ChildHome';
+import ChildHome from './ChildSection/ChildHome';
 import ShareStories from './AdultSection/Pages/ShareStories';
 import Volunteer from './AdultSection/Pages/Volunteer';
 import Features from "./AdultSection/Pages/Features";
-import Videos from './AutismAppPages/Child/Videos';
-import Puzzles from './AutismAppPages/Child/Puzzles';
-import Games from './AutismAppPages/Child/Games';
+import Videos from './ChildSection/Videos';
+import Puzzles from './ChildSection/Puzzles';
+import Games from './ChildSection/Games';
 import VolunteerForm from './AdultSection/Pages/VolunteerForm'
 import ViewEventsAdultSection from './AdultSection/Pages/ViewEventsAdultSection';
-import CourseCompletion from './AutismAppPages/Child/CourseCompletion';
+import CourseCompletion from './ChildSection/CourseCompletion';
 
 import About from './AutismAppPages/About';
 import Team from './AutismAppPages/Team';
 
 import Profile from './AutismAppPages/Profile';
 import Story from './AdultSection/components/Story';
+import Login from './AutismAppPages/Login';
+import Signup from './AutismAppPages/Signup';
 
 
 function App() {
@@ -28,6 +30,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Landing />} exact />
+          <Route path='/login' element={<Login />} exact />
+          <Route path='/signup' element={<Signup />} exact />
           <Route path="/adult" element={<AdultHome />} exact />
           <Route path="/child" element={<ChildHome />} exact />
           <Route path="/games" element={<Games />} exact />

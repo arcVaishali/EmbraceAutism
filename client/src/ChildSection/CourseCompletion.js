@@ -1,7 +1,7 @@
 import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Confetti from "react-confetti";
-import ButtonPrimary from "../../AutismAppComponents/ButtonPrimary";
+import ButtonPrimary from "../AutismAppComponents/ButtonPrimary";
 import { Link } from "react-router-dom";
 
 const CourseCompletion = () => {
